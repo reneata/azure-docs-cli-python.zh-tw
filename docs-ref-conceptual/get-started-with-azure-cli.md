@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 85c418a8-6177-4833-bb8d-ff4ce2233c1a
-ms.openlocfilehash: 0f8e494ffdd73c666b8361488db0966af01d6876
-ms.sourcegitcommit: 66d997a5afcf32143a4d4817ec1608cbdf58a59f
+ms.openlocfilehash: 45e51918ec95494699bf781f66e4cd57bd06fbad
+ms.sourcegitcommit: b4cb5c910b2238cba342f70122feb158c4036844
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/11/2017
+ms.lasthandoff: 05/18/2017
 ---
 # <a name="get-started-with-azure-cli-20"></a>開始使用 Azure CLI 2.0
 
@@ -40,6 +40,9 @@ Azure CLI 2.0 已針對從命令列管理 Azure 資源進行最佳化，以及�
   
 如果您收到錯誤，可能是安裝 CLI 時發生問題。 檢閱 [Azure CLI 2.0 安裝文章](install-azure-cli.md#troubleshooting)的〈安裝疑難排解〉一節以取得指引，或在該頁面底部的討論中張貼留言以取得協助。
 
+> [!Note]
+> 如果不想要安裝 Azure CLI 2.0，您可以使用 [Cloud Shell](/azure/cloud-shell/overview)，以便在瀏覽器中執行。
+
 ## <a name="log-in-to-azure"></a>登入 Azure
 
 現在您已安裝 Azure CLI 2.0，下一個步驟就是與您的 Azure 帳戶安全地連線。 使用 `az login` 命令來執行這項操作。
@@ -62,7 +65,7 @@ Azure CLI 2.0 已針對從命令列管理 Azure 資源進行最佳化，以及�
 
 一切都已準備就緒，接下來我們要使用 Azure CLI 在 Azure 中建立資源。
 
-首先，建立資源群組。  對於您想要以邏輯方式群組在一起的多個資源，Azure 的資源群組可讓您有辦法管理這些資源。  例如，您可以為應用程式或專案建立資源群組，並在該群組中新增虛擬機器、資料庫和 CDN 服務。
+首先，建立資源群組。  針對您想要以邏輯方式進行分組的多個資源，Azure 中的「資源群組」提供一個讓您管理這些資源的方式。  例如，您可以為應用程式或專案建立資源群組，並在該群組中新增虛擬機器、資料庫和 CDN 服務。
 
 讓我們建立一個名為「MyResourceGroup」的資源群組，位置則定在 Azure 的 westus2 區域。  若要這麼做，請輸入下列命令：
 
@@ -89,7 +92,7 @@ az group create -n MyResourceGroup -l westus2
 
 我們已擁有資源群組，接著我們要在其中建立 Linux VM。
 
-您可以使用熱門的 UbuntuTLS 映像，來建立具有 10 GB 和 20 GB 兩個連結儲存體磁碟的 Linux VM，請使用下列命令︰
+您可以使用下列命令搭配常用的 UbuntuTLS 映像，以建立一個具有 10 GB 和 20 GB 兩個連結儲存體磁碟的 Linux VM︰
 
 ```azurecli-interactive
 az vm create -n MyLinuxVM -g MyResourceGroup --image UbuntuLTS --data-disk-sizes-gb 10 20
@@ -155,7 +158,7 @@ my-login@MyLinuxVM:~$
 
 ## <a name="create-a-windows-server-virtual-machine"></a>建立 Windows Server 虛擬機器
 
-現在讓我們使用 `az vm create` 命令來建立以 Windows Server 2016 Datacenter 為基礎的 VM，並將它新增至用於我們 Linux VM 的相同 "MyResourceGroup" 資源群組。  如同 Linux VM 範例，我們也會使用 `--data-disk-sizes-gb` 參數來連結兩個儲存體磁碟。
+現在讓我們使用 `az vm create` 命令來建立以 Windows Server 2016 Datacenter 為基礎 VM，並將它新增至用於我們 Linux VM 的相同 "MyResourceGroup" 資源群組。  如同 Linux VM 範例，我們也會使用 `--data-disk-sizes-gb` 參數來連結兩個儲存體磁碟。
 
 Azure 要求您避免使用輕易猜到的使用者名稱/密碼。 關於可使用哪些字元以及使用者名稱和密碼的最小長度，皆有特定的規則。  
 
@@ -237,7 +240,7 @@ SQL Database Server         az sql server create
 Document DB                 az documentdb create
 ```
 
-若要深入了解您可以傳遞給每個先前命令的其他資源特定參數，以及您可以建立的資源類型，請瀏覽[參考文件](/azure/doc-ref-autogen)。 
+若要深入了解您可以傳遞給每個先前命令的其他資源特定參數，以及您可以建立的資源類型，請瀏覽[參考文件](/cli/azure)。 
 
 ## <a name="useful-tip-optimizing-create-operations-using---no-wait"></a>實用秘訣︰使用 --no-wait 將建立作業最佳化
 

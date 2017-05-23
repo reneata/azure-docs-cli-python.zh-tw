@@ -9,34 +9,48 @@
     - name: Install
       tocHref: /cli/azure/install-azure-cli
       topicHref: /cli/azure/install-azure-cli
-    - name: Get Started
+    - name: 開始使用
       tocHref: /cli/azure/get-started-with-azure-cli
       topicHref: /cli/azure/get-started-with-azure-cli
-    - name: Log in
+    - name: 登入
       tocHref: /cli/azure/authenticate-azure-cli
       topicHref: /cli/azure/authenticate-azure-cli
       items:
-      - name: Create a service principal
+      - name: 建立服務主體
         tocHref: /cli/azure/create-an-azure-service-principal-azure-cli
         topicHref: /cli/azure/create-an-azure-service-principal-azure-cli
-    - name: Output formats
+    - name: 互動模式
+      tocHref: /cli/azure/interactive-azure-cli
+      topicHref: /cli/azure/interactive-azure-cli
+    - name: 部署
+      items:
+      - name: 搭配範本
+        tocHref: /azure/azure-resource-manager/resource-group-template-deploy-cli
+        topicHref: /azure/azure-resource-manager/resource-group-template-deploy-cli
+      - name: 匯出範本
+        tocHref: /azure/azure-resource-manager/resource-manager-export-template-cli
+        topicHref: /azure/azure-resource-manager/resource-manager-export-template-cli
+      - name: 搭配私用範本
+        tocHref: /azure-resource-manager/resource-manager-cli-sas-token
+        topicHref: /azure-resource-manager/resource-manager-cli-sas-token
+    - name: 輸出格式
       tocHref: /cli/azure/format-output-azure-cli
       topicHref: /cli/azure/format-output-azure-cli
-    - name: Query
+    - name: 查詢
       tocHref: /cli/azure/query-azure-cli
       topicHref: /cli/azure/query-azure-cli
-    - name: Subscriptions
+    - name: 訂用帳戶
       tocHref: /cli/azure/manage-azure-subscriptions-azure-cli
       topicHref: /cli/azure/manage-azure-subscriptions-azure-cli
-    - name: Release notes
+    - name: 版本資訊
       tocHref: /cli/azure/release-notes-azure-cli
       topicHref: /cli/azure/release-notes-azure-cli
-    - name: Sample scripts
+    - name: 範例指令碼
       items:
-      - name: Linux VMs
+      - name: Linux VM
         tocHref: /azure/virtual-machines/linux/cli-samples?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
         topicHref: /azure/virtual-machines/linux/cli-samples?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
-      - name: Windows VMs
+      - name: Windows VM
         tocHref: /azure/virtual-machines/windows/cli-samples?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
         topicHref: /azure/virtual-machines/windows/cli-samples?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
       - name: Web Apps
@@ -45,6 +59,6 @@
       - name: SQL Database
         tocHref: /azure/sql-database/sql-database-cli-samples?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
         topicHref: /azure/sql-database/sql-database-cli-samples?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
-    - name: Reference
+    - name: 參考
       tocHref: /cli/azure
       topicHref: /cli/azure
