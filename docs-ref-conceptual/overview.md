@@ -12,15 +12,16 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 80ae9f6c-adb7-483c-bfb4-fbb958e075ba
-ms.openlocfilehash: 35e754b4ecd75481bd60d95dd1545b798c2e85b3
-ms.sourcegitcommit: c077bd5cbe07f7225714c41714d3981fa0d9928f
+ms.openlocfilehash: 2f2fe7e8643256f72ff5dd48c784b96e53c4c281
+ms.sourcegitcommit: 21c42ed07c9f7679e4860013ac5647cf31213f4e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 05/16/2017
+ms.lasthandoff: 05/22/2017
 ---
 # <a name="azure-cli-20"></a>Azure CLI 2.0
 
-Azure CLI 2.0 是管理 Azure 資源的 Azure 新命令列體驗。  它可以用於 macOS、Linux 和 Windows。 
+Azure CLI 2.0 是管理 Azure 資源的 Azure 新命令列體驗。
+您可以透過 [Azure Cloud Shell](/azure/cloud-shell/overview) 在瀏覽器中使用，或者在 macOS、Linux 和 Windows 中[安裝](install-azure-cli.md)並從命令列中執行。
 
 Azure CLI 2.0 已針對從命令列管理 Azure 資源進行最佳化，以及讓您建置可對 Azure Resource Manager 起作用的自動化指令碼。 使用 Azure CLI 2.0，您只要輕鬆輸入下列命令，就可以在 Azure 中建立 VM：
 
@@ -28,7 +29,7 @@ Azure CLI 2.0 已針對從命令列管理 Azure 資源進行最佳化，以及�
 az vm create -n MyLinuxVM -g MyResourceGroup --image UbuntuLTS
 ```
 
-請檢閱[安裝文章](install-azure-cli.md)來讓 Azure CLI 2.0 在您的系統上啟動並執行，或使用 [Cloud Shell](/azure/cloud-shell/overview) 以在瀏覽器中執行 CLI。
+使用 [Cloud Shell](/azure/cloud-shell/overview) 在您的瀏覽器中執行 CLI，或在 macOS、Linux 或 Windows 中[安裝](install-azure-cli.md)。
 閱讀[開始使用](get-started-with-azure-cli.md)文章來開始使用 CLI。
 如需最新版本的相關資訊，請參閱[版本資訊](release-notes-azure-cli.md)。
 
