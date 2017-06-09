@@ -12,10 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: fab89cb8-dac1-4e21-9d34-5eadd5213c05
-ms.openlocfilehash: 10a168ae0c33207905d58b7b57ac9ad76d8d9bf4
-ms.sourcegitcommit: 73a73c8a17d95b116d33eee3287d938addc5c0ac
+ms.openlocfilehash: 0ee794d5a732c6e8d2d52fca5810a874827930ae
+ms.sourcegitcommit: 4fd631a58cf19c494162510d073fbbbdf0524d16
 ms.translationtype: HT
 ms.contentlocale: zh-TW
+ms.lasthandoff: 06/05/2017
 ---
 # <a name="create-an-azure-service-principal-with-azure-cli-20"></a>使用 Azure CLI 2.0 來建立 Azure 服務主體
 
@@ -34,7 +35,7 @@ Azure 服務主體是一項安全性識別，可供使用者所建立的應用�
 
 ## <a name="verify-your-own-permission-level"></a>確認您自己的權限等級
 
-首先，您在 Azure Active Directory 和您的 Azure 訂用帳戶中都必須有足夠的權限。 具體來說，您必須能夠在 Active Directory 中建立應用程式，並將角色指派給服務主體。 
+首先，您在 Azure Active Directory 和 Azure 訂用帳戶中都必須有足夠的權限。 具體來說，您必須能夠在 Active Directory 中建立應用程式，並將角色指派給服務主體。 
 
 檢查您的帳戶是否具有足夠的權限，最簡單的方式是透過入口網站。 請參閱[在入口網站中檢查必要的權限](/azure/azure-resource-manager/resource-group-create-service-principal-portal.md#required-permissions)。
 
@@ -51,7 +52,9 @@ Azure 服務主體是一項安全性識別，可供使用者所建立的應用�
 
 使用 `az ad app list` 來取得您應用程式的身分識別資訊。
 
-```azurecli
+[!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
+
+```azurecli-interactive
 az ad app list --display-name MyDemoWebApp
 ```
 
@@ -77,7 +80,7 @@ az ad app list --display-name MyDemoWebApp
 
 使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 來建立服務主體。 
 
-```azurecli
+```azurecli-interactive
 az ad sp create-for-rbac --name {appId} --password "{strong password}" 
 ``` 
 
@@ -96,7 +99,7 @@ az ad sp create-for-rbac --name {appId} --password "{strong password}"
 
 ### <a name="get-information-about-the-service-principal"></a>取得服務主體的相關資訊
 
-```azurecli
+```azurecli-interactive
 az ad sp show --id a487e0c1-82af-47d9-9a0b-af184eb87646d
 ```
 
@@ -117,7 +120,7 @@ az ad sp show --id a487e0c1-82af-47d9-9a0b-af184eb87646d
 
 您現在可以使用來自 `az ad sp show`的「應用程式識別碼」和「密碼」，來登入成為應用程式的新服務主體。  提供 `az ad sp create-for-rbac` 結果中的租用戶值。
 
-```azurecli
+```azurecli-interactive
 az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password {password} --tenant {tenant}
 ``` 
 
@@ -158,14 +161,14 @@ Azure CLI 2.0 提供下列命令以供您管理角色指派︰
 
 在此範例中，對先前的範例新增**讀取者**角色，並刪除**參與者**角色︰
 
-```azurecli
+```azurecli-interactive
 az role assignment create --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d --role Reader
 az role assignment delete --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d --role Contributor
 ```
 
 列出目前指派的角色來確認變更︰
 
-```azurecli
+```azurecli-interactive
 az role assignment list --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d
 ```
 
@@ -196,7 +199,7 @@ az role assignment list --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d
 
 使用 `az ad sp reset-credentials` 將目前的服務主體密碼進行重設。
 
-```azurecli
+```azurecli-interactive
 az ad sp reset-credentials --name 20bce7de-3cd7-49f4-ab64-bb5b443838c3 --password {new-password}
 ```
 

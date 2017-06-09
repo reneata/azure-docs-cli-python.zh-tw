@@ -12,10 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 74bdb727-481d-45f7-a44e-15d18dc55483
-ms.openlocfilehash: de37b1ad6aa55c9ac73b5b6b89d9507c86cc1245
-ms.sourcegitcommit: bcf93ad8ed8802072249cd8187cd4420da89b4c6
+ms.openlocfilehash: d1440cc1e99ccddb18d23306cc0fcdb4b8babf14
+ms.sourcegitcommit: 4fd631a58cf19c494162510d073fbbbdf0524d16
 ms.translationtype: HT
 ms.contentlocale: zh-TW
+ms.lasthandoff: 06/05/2017
 ---
 # <a name="output-formats-for-azure-cli-20-commands"></a>Azure CLI 2.0 命令的輸出格式
 
@@ -28,11 +29,13 @@ Azure CLI 2.0 會使用 json 作為其預設輸出選項，但會提供各種方
 `table`  | 包含資料行標題的資料表。
 `tsv`    | 定位字元分隔值。
 
+[!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
+
 ## <a name="using-the-json-option"></a>使用 json 選項
 
 下列範例會以預設的 json 格式顯示訂用帳戶中的虛擬機器清單。
 
-```azurecli
+```azurecli-interactive
 az vm list --output json
 ```
 
@@ -70,7 +73,7 @@ az vm list --output json
 
 資料表選項提供簡單的設定輸出集讀取方式，但請注意，不同於上述 json 範例，具有簡單 `--output table` 的輸出中不包含巢狀物件。  使用具有 'table' 輸出格式的相同範例來提供最常見屬性值的策劃清單。
 
-```azurecli
+```azurecli-interactive
 az vm list --out table
 ```
 
@@ -86,7 +89,7 @@ KBDemo020    RGDEMO001        westus
 
 您可以使用 `--query` 參數，以自訂您想要在此清單輸出中顯示的屬性和資料行。 下列範例會顯示如何在 `list` 命令中只選取 VM 名稱和資源群組名稱。
 
-```azurecli
+```azurecli-interactive
 az vm list --query "[].{ resource: resourceGroup, name: name }" -o table
 ```
 
@@ -104,7 +107,7 @@ RGDEMO001   KBDemo020
 
 'tsv' 輸出格式會傳回以文字為基礎和定位字元分隔的簡單輸出，沒有標題及連字號。 此格式可讓您輕鬆地取用輸出至需要以某種形式處理文字的其他命令和工具。 使用先前具有 `tsv` 選項的範例，會將定位字元分隔的結果輸出。
 
-```azurecli
+```azurecli-interactive
 az vm list --out tsv
 ```
 

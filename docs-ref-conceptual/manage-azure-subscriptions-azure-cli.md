@@ -12,10 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 98fb955e-6dbf-47e2-80ac-170d6d95cb70
-ms.openlocfilehash: a28b24dd186fc567f36e52f8a0f5a7c2b0af060c
-ms.sourcegitcommit: c2d380f4ad8e7606850530db690855bcccfd6e86
+ms.openlocfilehash: 383fb6ebd90ac79f60869187b402d53d4f1791fd
+ms.sourcegitcommit: 4fd631a58cf19c494162510d073fbbbdf0524d16
 ms.translationtype: HT
 ms.contentlocale: zh-TW
+ms.lasthandoff: 06/05/2017
 ---
 # <a name="manage-multiple-azure-subscriptions"></a>管理多個 Azure 訂用帳戶
 
@@ -23,9 +24,11 @@ ms.contentlocale: zh-TW
 但是，如果您已使用 Azure 一段時間，就可能已建立了多個 Azure 訂用帳戶。
 如果是如此，您可以將 Azure CLI 2.0 設定為針對特定的訂用帳戶執行命令。
 
+[!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
+
 1. 取得您帳戶中所有訂用帳戶的清單。
 
-   ```azurecli
+   ```azurecli-interactive
    az account list --output table
    ```
 
@@ -39,7 +42,7 @@ ms.contentlocale: zh-TW
 
 1. 預設設定。
  
-   ```azurecli
+   ```azurecli-interactive
    az account set --subscription "My Demos"
    ```
 
