@@ -126,7 +126,7 @@ ms.lasthandoff: 09/04/2017
 * `create`：已修正環境變數內不允許等號的問題
 
 
-### <a name="data-lake-store"></a>Data Lake Store
+### <a name="data-lake-store"></a>資料湖存放區
 
 * 已啟用進度控制項
 
@@ -278,7 +278,7 @@ vm (2.0.11)
 * 已新增 `dla job pipeline show`
 * 已新增 `dla job recurrence list`
 
-### <a name="data-lake-store"></a>Data Lake Store
+### <a name="data-lake-store"></a>資料湖存放區
 
 * 已新增在 `dls account update` 中使用者受控金鑰保存庫金鑰旋轉的支援
 * 已更新基礎 Data Lake Store filesystem SDK 版本，從而解決效能問題
