@@ -1,7 +1,7 @@
 ---
 title: "安裝 Azure CLI 2.0"
 description: "安裝 Azure CLI 2.0 的參考文件"
-keywords: "Azure CLI 2.0, Azure CLI 2.0 參考, 安裝 Azure CLI 2.0, Azure Python CLI, 解除安裝 Azure CLI 2.0, Azure CLI, 安裝 Azure CLI, Azure CLI 參考"
+keywords: "Azure CLI, 安裝 Azure CLI, Azure Python CLI, Azure CLI 參考"
 author: sptramer
 ms.author: sttramer
 manager: routlaw
@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 00d5b555975007d7e57f04ce5d69f4f29e6d0219
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: a61f47076854d0ff0a7056f82240794b7533fe3e
+ms.sourcegitcommit: 3db5fb207db551a0d3fe0a88fe09e8f5e2ec184d
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 09/14/2017
 ---
 # <a name="install-azure-cli-20"></a>安裝 Azure CLI 2.0
 
@@ -79,7 +79,7 @@ ms.lasthandoff: 09/04/2017
 
 以 Debian/Ubuntu 為基礎的系統，您可以透過 `apt-get` 安裝 Azure CLI 2.0。
 
-1. 修改來源清單。
+1. 修改來源清單：
  
    - 32 位元系統
 
@@ -105,15 +105,63 @@ ms.lasthandoff: 09/04/2017
 
 3.  從具有 `az` 命令的命令提示字元中執行 CLI。
 
+## <a name="install-on-rhel-fedora-and-centos-with-yum"></a>安裝於 RHEL、Fedora 及 CentOS 搭配 Yum
+
+對於任何以 RedHat 為基礎且包含 `yum` 套件管理員的散發套件，您可以透過 `yum` 安裝 Azure CLI 2.0。
+
+1. 匯入 Microsoft 存放庫金鑰：
+
+   ```bash
+   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+   ```
+
+2. 建立本機 `azure-cli` 存放庫資訊：
+
+   ```bash
+   sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+   ```
+
+3. 更新 `yum` 套件索引並安裝：
+
+   ```bash
+   yum check-update
+   sudo yum install azure-cli
+   ```
+
+4. 從具有 `az` 命令的命令提示字元中執行 CLI。
+
+## <a name="install-on-opensuse-and-sle-with-zypper"></a>安裝於 openSUSE 和 SLE 搭配 Zypper
+
+1. 匯入 Microsoft 存放庫金鑰：
+
+   ```bash
+   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+   ```
+
+2. 建立本機 `azure-cli` 存放庫資訊：
+
+   ```bash
+   sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/azure-cli.repo'
+   ```
+
+3. 更新 `zypper` 套件索引並安裝：
+
+   ```bash
+   sudo zypper refresh
+   sudo zypper install azure-cli
+   ```
+
+4. 從具有 `az` 命令的命令提示字元中執行 CLI。
+
 ## <a name="install-with-docker"></a>使用 Docker 安裝
 
 我們會維護使用 Azure CLI 2.0 預先設定的 Docker 映像。
 
 使用 `docker run` 安裝 CLI。
 
-  ```bash
-  docker run azuresdk/azure-cli-python:<version>
-  ```
+   ```bash
+   docker run azuresdk/azure-cli-python:<version>
+   ```
 
 請參閱我們的 [Docker 標籤](https://hub.docker.com/r/azuresdk/azure-cli-python/tags/)，以取得可用的版本。
 
@@ -128,7 +176,7 @@ CLI 會安裝在映像上，作為 `/usr/local/bin` 中的 `az` 命令。
 
 ## <a name="a-namelinuxinstall-on-linux-without-apt-get"></a><a name="Linux"/>不使用 apt-get 在 Linux 安裝
 
-如果可行，建議您使用 `apt-get` 安裝 CLI。 針對不需要使用 `apt` 套件管理員的散發套件，您可以手動方式來安裝。
+如果可行，建議您使用套件管理員安裝 CLI。 針對不需要使用套件的散發套件，您可以手動方式來安裝。
 
 1. 以您的 Linux 散發套件作為基礎安裝必要條件。
 
@@ -289,26 +337,26 @@ brew uninstall azure-cli
 
 1. 取得執行 azure-cli 映像的容器。
 
-  ```bash
-  docker container ls -a --filter 'ancestor=azuresdk/azure-cli-python'
-  ```
+   ```bash
+   docker container ls -a --filter 'ancestor=azuresdk/azure-cli-python'
+   ```
 
-  ```output
-  CONTAINER ID        IMAGE                              COMMAND             CREATED             STATUS                        PORTS               NAMES
-  34a868beb2ab        azuresdk/azure-cli-python:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
-  ```
+   ```output
+   CONTAINER ID        IMAGE                              COMMAND             CREATED             STATUS                        PORTS               NAMES
+   34a868beb2ab        azuresdk/azure-cli-python:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
+   ```
 
 2. 將任何使用 CLI 映像的容器刪除。
 
-  ```bash
-  docker rm 34a868beb2ab
-  ```
+   ```bash
+   docker rm 34a868beb2ab
+   ```
 
 3. 將本機安裝的 CLI 映像移除。
 
-  ```bash
-  docker rmi azuresdk/azure-cli-python
-  ```
+   ```bash
+   docker rmi azuresdk/azure-cli-python
+   ```
 
 > [!NOTE]
 > 如果您已安裝特定版本的映像，就必須將 `:<version>` 新增至映像名稱的結尾。

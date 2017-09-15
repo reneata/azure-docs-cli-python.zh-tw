@@ -12,13 +12,87 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: e893b99349bbf2a5eec8af254158eb07001f1da7
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: ad30efeb7efafcc5816160ee130665d37adb62c6
+ms.sourcegitcommit: e866977985ba0286fa05f41729dd7e7d9ce86f8e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 09/13/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Azure CLI 2.0 版本資訊
+
+## <a name="september-11-2017"></a>2017 年 9 月 11 日
+
+版本 2.0.17
+
+### <a name="core"></a>核心
+
+* 啟用命令模組以在遙測中設定自己的相互關聯識別碼
+* 修正當遙測設為診斷模式時的 JSON 傾印問題
+
+### <a name="acs"></a>ACS
+
+* 已新增 `acs list-locations` 命令
+* 讓 `ssh-key-file` 隨附預期的預設值
+
+### <a name="appservice"></a>AppService
+
+* 新增在資源群組中建立 Web 應用程式，而非在作用中服務計劃中建立 Web 應用程式的功能
+
+### <a name="cdn"></a>CDN
+
+* 修正 `cdn custom-domain create` 的「CustomDomain 無法互動」錯誤。
+
+### <a name="extension"></a>分機
+
+* 初始版本。
+
+### <a name="keyvault"></a>Keyvault
+
+* 修正對 `keyvault set-policy` 的權限區分大小寫的問題。
+
+### <a name="network"></a>網路
+
+* 已將 `vnet list-private-access-services` 重新命名為 `vnet list-endpoint-services`
+* 己針對 `vnet subnet create/update` 將 `--private-access-services` 引數重新命名為 `--service-endpoints`
+* 已將多個 IP 和連接埠範圍的支援新增至 `nsg rule create/update`
+* 已將 SKU 的支援新增至 `lb create`
+* 已將 SKU 的支援新增至 `public-ip create`
+
+### <a name="resource"></a>資源
+
+* 允許在 `policy definition create` 及 `policy definition update` 中傳送資源原則參數定義
+* 允許為 `policy assignment create` 傳送參數值
+* 允許為所有參數傳送 JSON 或檔案
+* 遞增的 API 版本
+
+### <a name="sql"></a>SQL
+
+* 已新增 `sql server vnet-rule` 命令
+
+### <a name="vm"></a>VM
+
+* 已修正：在提供 `--scope` 之前不指派存取權
+* 已修正：使用相同延伸模組命名作為入口網站
+* 已從 `[vm|vmss] create` 輸出移除 `subscription`
+* 已修正：`[vm|vmss] create` 儲存體 SKU 不會套用至搭配映像的資料磁碟
+* 已修正：`vm format-secret --secrets` 不會接受新行分隔識別碼
+
+## <a name="august-31-2017"></a>2017 年 8 月 31 日
+
+版本 2.0.16
+
+### <a name="keyvault"></a>Keyvault
+
+* 修正試著自動使用 `secret download` 解析祕密編碼時發生錯誤的問題
+
+### <a name="sf"></a>Sf
+
+* 取代所有命令，以利於 Service Fabric CLI (sfctl)
+
+### <a name="storage"></a>儲存體
+
+* 修正無法在不支援 NetworkACL 功能的區域中建立儲存體帳戶的問題
+* 若指定內容類型和內容編碼，則判斷 Blob 及檔案上傳期間的內容類型及內容編碼
 
 ## <a name="august-28-2017"></a>2017 年 8 月 28 日
 
