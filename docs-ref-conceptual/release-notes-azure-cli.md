@@ -12,77 +12,13 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: e893b99349bbf2a5eec8af254158eb07001f1da7
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 39e4710a29ac57730919b82ab76b9c9a4b9ca786
+ms.sourcegitcommit: 43d4f838d132ab9bcfa59dbda3b544c06373b6a9
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 08/22/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Azure CLI 2.0 版本資訊
-
-## <a name="august-28-2017"></a>2017 年 8 月 28 日
-
-版本 2.0.15
-
-### <a name="cli"></a>CLI
-
-* 已將法律注意事項新增至 `--version`。
-
-### <a name="acs"></a>ACS
-
-* 已更正預覽區域。
-* 已正確格式化預設 `dns_name_prefix`。
-* 最佳化的 acs 命令輸出。
-
-### <a name="appservice"></a>AppService
-
-* [新變更] 已修正 `az webapp config appsettings [delete|set]` 輸出中的不一致
-* 已針對 `az webapp config container set --docker-custom-image-name` 新增 `-i` 的新別名
-* 已公開 `az webapp log show`
-* 已公開 `az webapp delete` 中的新引數，可保留應用程式服務計劃、計量或 DNS 註冊
-* 已修正：正確偵測到位置設定
-
-### <a name="iot"></a>IoT
-
-* 已修正 #3934：建立原則時無法再清除現有的原則
-
-### <a name="network"></a>網路
-
-* [新變更] 已將 `vnet list-private-access-services` 重新命名為 `vnet list-endpoint-services`
-* [新變更] 已將 `--private-access-services` 選項重新命名為適用於 `vnet subnet [create|update]` 的 `--service-endpoints`
-* 已將多個 IP 和連接埠範圍的支援新增至 `nsg rule [create|update]`
-* 已將 SKU 的支援新增至 `lb create`
-* 已將 SKU 的支援新增至 `public-ip create`
-
-### <a name="profile"></a>設定檔
-
-* 已公開 `--msi` 和 `--msi-port`，可使用虛擬機器的身分識別登入
-
-### <a name="service-fabric"></a>Service Fabric
-
-* 預覽版本
-* 簡化的登錄使用者/命令的密碼規則
-* 已修正使用者即使在參數中傳遞之後的密碼提示
-* 已新增空白 `registry_cred` 的支援
-
-### <a name="storage"></a>儲存體
-
-* 已啟用設定 blob 層
-* 已將 `--bypass` 和 `--default-action` 引數新增至 `storage account [create|update]` 以支援服務通道
-* 新增的命令可將 VNET 規則和以 IP 作為基礎的規則新增至 `storage account network-rule`  
-* 透過客戶管理的金鑰啟用服務加密
-* [新變更] 已將 `--encryption` 選項重新命名為適用於 `az storage account create and az storage account update` 命令的 `--encryption-services`
-* 已修正 #4220：`az storage account update encryption` - 語法不相符
-
-### <a name="vm"></a>VM
-
-* 已修正使用 `--instance-id *` 時會顯示 `vmss get-instance-view` 的額外錯誤資訊的錯誤
-* 已將 `--lb-sku` 的支援新增至 `vmss create`： 
-* 從 `[vm|vmss] create` 的系統管理員名稱封鎖清單移除人力名稱 
-* 已修正在無法從映像擷取計劃資訊時，`[vm|vmss] create` 會擲回錯誤的問題
-* 已修正使用內部 LB 建立 vmms scaleset 時的損毀
-* 已修正 `--no-wait` 引數無法與 `vm availability-set create` 搭配使用的問題
-
 
 ## <a name="august-15-2017"></a>2017 年 8 月 15 日
 
