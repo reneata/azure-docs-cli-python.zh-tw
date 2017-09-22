@@ -141,6 +141,137 @@
             - name: 顯示
               uid: az_ad_user_show
               displayName: az ad user show
+    - name: 備份
+      uid: az_backup
+      displayName: az backup
+      items:
+        - name: 容器
+          uid: az_backup_container
+          displayName: az backup container
+          items:
+            - name: 列出
+              uid: az_backup_container_list
+              displayName: az backup container list
+            - name: 顯示
+              uid: az_backup_container_show
+              displayName: az backup container show
+        - name: Item
+          uid: az_backup_item
+          displayName: az backup item
+          items:
+            - name: 列出
+              uid: az_backup_item_list
+              displayName: az backup item list
+            - name: Set-Policy
+              uid: az_backup_item_set_policy
+              displayName: az backup item set-policy
+            - name: 顯示
+              uid: az_backup_item_show
+              displayName: az backup item show
+        - name: 作業
+          uid: az_backup_job
+          displayName: az backup job
+          items:
+            - name: 列出
+              uid: az_backup_job_list
+              displayName: az backup job list
+            - name: 顯示
+              uid: az_backup_job_show
+              displayName: az backup job show
+            - name: 停止
+              uid: az_backup_job_stop
+              displayName: az backup job stop
+            - name: 等候
+              uid: az_backup_job_wait
+              displayName: az backup job wait
+        - name: 原則
+          uid: az_backup_policy
+          displayName: az backup policy
+          items:
+            - name: 刪除
+              uid: az_backup_policy_delete
+              displayName: az backup policy delete
+            - name: Get-Default-For-Vm
+              uid: az_backup_policy_get_default_for_vm
+              displayName: az backup policy get-default-for-vm
+            - name: 列出
+              uid: az_backup_policy_list
+              displayName: az backup policy list
+            - name: List-Associated-Items
+              uid: az_backup_policy_list_associated_items
+              displayName: az backup policy list-associated-items
+            - name: 設定
+              uid: az_backup_policy_set
+              displayName: az backup policy set
+            - name: 顯示
+              uid: az_backup_policy_show
+              displayName: az backup policy show
+        - name: 保護
+          uid: az_backup_protection
+          displayName: az backup protection
+          items:
+            - name: Backup-Now
+              uid: az_backup_protection_backup_now
+              displayName: az backup protection backup-now
+            - name: 停用
+              uid: az_backup_protection_disable
+              displayName: az backup protection disable
+            - name: Enable-For-Vm
+              uid: az_backup_protection_enable_for_vm
+              displayName: az backup protection enable-for-vm
+        - name: Recoverypoint
+          uid: az_backup_recoverypoint
+          displayName: az backup recoverypoint
+          items:
+            - name: 列出
+              uid: az_backup_recoverypoint_list
+              displayName: az backup recoverypoint list
+            - name: 顯示
+              uid: az_backup_recoverypoint_show
+              displayName: az backup recoverypoint show
+        - name: 還原
+          uid: az_backup_restore
+          displayName: az backup restore
+          items:
+            - name: Restore-Disks
+              uid: az_backup_restore_restore_disks
+              displayName: az backup restore restore-disks
+            - name: 檔案
+              uid: az_backup_restore_files
+              displayName: az backup restore files
+              items:
+                - name: Mount-Rp
+                  uid: az_backup_restore_files_mount_rp
+                  displayName: az backup restore files mount-rp
+                - name: Unmount-Rp
+                  uid: az_backup_restore_files_unmount_rp
+                  displayName: az backup restore files unmount-rp
+        - name: 保存庫
+          uid: az_backup_vault
+          displayName: az backup vault
+          items:
+            - name: 建立
+              uid: az_backup_vault_create
+              displayName: az backup vault create
+            - name: 刪除
+              uid: az_backup_vault_delete
+              displayName: az backup vault delete
+            - name: 列出
+              uid: az_backup_vault_list
+              displayName: az backup vault list
+            - name: 顯示
+              uid: az_backup_vault_show
+              displayName: az backup vault show
+            - name: Backup-Properties
+              uid: az_backup_vault_backup_properties
+              displayName: az backup vault backup-properties
+              items:
+                - name: 設定
+                  uid: az_backup_vault_backup_properties_set
+                  displayName: az backup vault backup-properties set
+                - name: 顯示
+                  uid: az_backup_vault_backup_properties_show
+                  displayName: az backup vault backup-properties show
     - name: 批次
       uid: az_batch
       displayName: az batch
@@ -2666,6 +2797,25 @@
                 - name: 顯示
                   uid: az_network_application_gateway_waf_config_show
                   displayName: az network application-gateway waf-config show
+        - name: Asg
+          uid: az_network_asg
+          displayName: az network asg
+          items:
+            - name: 建立
+              uid: az_network_asg_create
+              displayName: az network asg create
+            - name: 刪除
+              uid: az_network_asg_delete
+              displayName: az network asg delete
+            - name: 列出
+              uid: az_network_asg_list
+              displayName: az network asg list
+            - name: 顯示
+              uid: az_network_asg_show
+              displayName: az network asg show
+            - name: 更新
+              uid: az_network_asg_update
+              displayName: az network asg update
         - name: DNS
           uid: az_network_dns
           displayName: az network dns
@@ -3547,6 +3697,9 @@
                 - name: 產生
                   uid: az_network_vnet_gateway_vpn_client_generate
                   displayName: az network vnet-gateway vpn-client generate
+                - name: Show-Url
+                  uid: az_network_vnet_gateway_vpn_client_show_url
+                  displayName: az network vnet-gateway vpn-client show-url
         - name: Watcher
           uid: az_network_watcher
           displayName: az network watcher
@@ -4186,49 +4339,10 @@
       uid: az_sf
       displayName: az sf
       items:
-        - name: Sfctl
-          uid: az_sf_sfctl
-          displayName: az sf sfctl
         - name: 應用程式
           uid: az_sf_application
           displayName: az sf application
           items:
-            - name: 建立
-              uid: az_sf_application_create
-              displayName: az sf application create
-            - name: 刪除
-              uid: az_sf_application_delete
-              displayName: az sf application delete
-            - name: 健康情況
-              uid: az_sf_application_health
-              displayName: az sf application health
-            - name: 列出
-              uid: az_sf_application_list
-              displayName: az sf application list
-            - name: 資訊清單
-              uid: az_sf_application_manifest
-              displayName: az sf application manifest
-            - name: Package-Delete
-              uid: az_sf_application_package_delete
-              displayName: az sf application package-delete
-            - name: 佈建
-              uid: az_sf_application_provision
-              displayName: az sf application provision
-            - name: Report-Health
-              uid: az_sf_application_report_health
-              displayName: az sf application report-health
-            - name: 類型
-              uid: az_sf_application_type
-              displayName: az sf application type
-            - name: 解除佈建
-              uid: az_sf_application_unprovision
-              displayName: az sf application unprovision
-            - name: 升級
-              uid: az_sf_application_upgrade
-              displayName: az sf application upgrade
-            - name: 上傳
-              uid: az_sf_application_upload
-              displayName: az sf application upload
             - name: 憑證
               uid: az_sf_application_certificate
               displayName: az sf application certificate
@@ -4236,38 +4350,16 @@
                 - name: 加
                   uid: az_sf_application_certificate_add
                   displayName: az sf application certificate add
-        - name: Chaos
-          uid: az_sf_chaos
-          displayName: az sf chaos
-          items:
-            - name: Start
-              uid: az_sf_chaos_start
-              displayName: az sf chaos start
         - name: 叢集
           uid: az_sf_cluster
           displayName: az sf cluster
           items:
-            - name: Code-Version
-              uid: az_sf_cluster_code_version
-              displayName: az sf cluster code-version
-            - name: Config-Version
-              uid: az_sf_cluster_config_version
-              displayName: az sf cluster config-version
             - name: 建立
               uid: az_sf_cluster_create
               displayName: az sf cluster create
-            - name: 健康情況
-              uid: az_sf_cluster_health
-              displayName: az sf cluster health
             - name: 列出
               uid: az_sf_cluster_list
               displayName: az sf cluster list
-            - name: 資訊清單
-              uid: az_sf_cluster_manifest
-              displayName: az sf cluster manifest
-            - name: 選取
-              uid: az_sf_cluster_select
-              displayName: az sf cluster select
             - name: 顯示
               uid: az_sf_cluster_show
               displayName: az sf cluster show
@@ -4339,125 +4431,6 @@
                 - name: 設定
                   uid: az_sf_cluster_upgrade_type_set
                   displayName: az sf cluster upgrade-type set
-        - name: 撰寫
-          uid: az_sf_compose
-          displayName: az sf compose
-          items:
-            - name: 建立
-              uid: az_sf_compose_create
-              displayName: az sf compose create
-            - name: 列出
-              uid: az_sf_compose_list
-              displayName: az sf compose list
-            - name: 移除
-              uid: az_sf_compose_remove
-              displayName: az sf compose remove
-            - name: 狀態
-              uid: az_sf_compose_status
-              displayName: az sf compose status
-        - name: 節點
-          uid: az_sf_node
-          displayName: az sf node
-          items:
-            - name: Code-Package
-              uid: az_sf_node_code_package
-              displayName: az sf node code-package
-            - name: 列出
-              uid: az_sf_node_list
-              displayName: az sf node list
-            - name: 載入
-              uid: az_sf_node_load
-              displayName: az sf node load
-            - name: Remove-State
-              uid: az_sf_node_remove_state
-              displayName: az sf node remove-state
-            - name: Replica-List
-              uid: az_sf_node_replica_list
-              displayName: az sf node replica-list
-            - name: Report-Health
-              uid: az_sf_node_report_health
-              displayName: az sf node report-health
-            - name: 重新啟動
-              uid: az_sf_node_restart
-              displayName: az sf node restart
-            - name: Service-Package
-              uid: az_sf_node_service_package
-              displayName: az sf node service-package
-            - name: Service-Package-List
-              uid: az_sf_node_service_package_list
-              displayName: az sf node service-package-list
-            - name: Service-Package-Upload
-              uid: az_sf_node_service_package_upload
-              displayName: az sf node service-package-upload
-            - name: Service-Type
-              uid: az_sf_node_service_type
-              displayName: az sf node service-type
-            - name: Service-Type-List
-              uid: az_sf_node_service_type_list
-              displayName: az sf node service-type-list
-            - name: Start
-              uid: az_sf_node_start
-              displayName: az sf node start
-            - name: 停止
-              uid: az_sf_node_stop
-              displayName: az sf node stop
-        - name: 資料分割
-          uid: az_sf_partition
-          displayName: az sf partition
-          items:
-            - name: 健康情況
-              uid: az_sf_partition_health
-              displayName: az sf partition health
-            - name: 資訊
-              uid: az_sf_partition_info
-              displayName: az sf partition info
-            - name: Report-Health
-              uid: az_sf_partition_report_health
-              displayName: az sf partition report-health
-            - name: Service-Name
-              uid: az_sf_partition_service_name
-              displayName: az sf partition service-name
-        - name: 複本
-          uid: az_sf_replica
-          displayName: az sf replica
-          items:
-            - name: 健康情況
-              uid: az_sf_replica_health
-              displayName: az sf replica health
-            - name: Report-Health
-              uid: az_sf_replica_report_health
-              displayName: az sf replica report-health
-        - name: 服務
-          uid: az_sf_service
-          displayName: az sf service
-          items:
-            - name: Application-Name
-              uid: az_sf_service_application_name
-              displayName: az sf service application-name
-            - name: 建立
-              uid: az_sf_service_create
-              displayName: az sf service create
-            - name: 說明
-              uid: az_sf_service_description
-              displayName: az sf service description
-            - name: 健康情況
-              uid: az_sf_service_health
-              displayName: az sf service health
-            - name: 列出
-              uid: az_sf_service_list
-              displayName: az sf service list
-            - name: 資訊清單
-              uid: az_sf_service_manifest
-              displayName: az sf service manifest
-            - name: Report-Health
-              uid: az_sf_service_report_health
-              displayName: az sf service report-health
-            - name: 解決
-              uid: az_sf_service_resolve
-              displayName: az sf service resolve
-            - name: 更新
-              uid: az_sf_service_update
-              displayName: az sf service update
     - name: 儲存體
       uid: az_storage
       displayName: az storage
@@ -5134,6 +5107,19 @@
             - name: 中斷連結
               uid: az_vmss_disk_detach
               displayName: az vmss disk detach
+        - name: 加密
+          uid: az_vmss_encryption
+          displayName: az vmss encryption
+          items:
+            - name: 停用
+              uid: az_vmss_encryption_disable
+              displayName: az vmss encryption disable
+            - name: 啟用
+              uid: az_vmss_encryption_enable
+              displayName: az vmss encryption enable
+            - name: 顯示
+              uid: az_vmss_encryption_show
+              displayName: az vmss encryption show
         - name: 擴充功能
           uid: az_vmss_extension
           displayName: az vmss extension
@@ -5256,6 +5242,9 @@
         - name: Open-Port
           uid: az_vm_open_port
           displayName: az vm open-port
+        - name: Perform-Maintenance
+          uid: az_vm_perform_maintenance
+          displayName: az vm perform-maintenance
         - name: 重新部署
           uid: az_vm_redeploy
           displayName: az vm redeploy
@@ -5411,6 +5400,19 @@
             - name: 顯示
               uid: az_vm_nic_show
               displayName: az vm nic show
+        - name: Run-Command
+          uid: az_vm_run_command
+          displayName: az vm run-command
+          items:
+            - name: 叫用
+              uid: az_vm_run_command_invoke
+              displayName: az vm run-command invoke
+            - name: 列出
+              uid: az_vm_run_command_list
+              displayName: az vm run-command list
+            - name: 顯示
+              uid: az_vm_run_command_show
+              displayName: az vm run-command show
         - name: 儲存體磁碟
           uid: az_vm_disk
           displayName: az vm disk
@@ -5478,6 +5480,16 @@
         - name: 停止
           uid: az_webapp_stop
           displayName: az webapp stop
+        - name: 驗證
+          uid: az_webapp_auth
+          displayName: az webapp auth
+          items:
+            - name: 顯示
+              uid: az_webapp_auth_show
+              displayName: az webapp auth show
+            - name: 更新
+              uid: az_webapp_auth_update
+              displayName: az webapp auth update
         - name: 設定
           uid: az_webapp_config
           displayName: az webapp config

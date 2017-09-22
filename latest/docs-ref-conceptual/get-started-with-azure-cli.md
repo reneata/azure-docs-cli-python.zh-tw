@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 85c418a8-6177-4833-bb8d-ff4ce2233c1a
-ms.openlocfilehash: 5d6d7abb34fa2be571a9a49f0f84380538592807
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 11153c13fb9868897b0bb21dac9d64072c3af16e
+ms.sourcegitcommit: 70c4d7a14591e5b761e261105cd2d376753f2a54
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 09/19/2017
 ---
 # <a name="get-started-with-azure-cli-20"></a>開始使用 Azure CLI 2.0
 
@@ -40,7 +40,7 @@ Azure CLI 2.0 已針對從命令列管理 Azure 資源進行最佳化，以及�
 
    ![建立儲存體帳戶](media/get-started-with-azure-cli/storage-prompt.png)
 
-您也可以[安裝](install-azure-cli.md) CLI，並從本機命令列執行。
+您也可以[安裝](install-azure-cli.md) CLI，並從本機命令列執行。 安裝了 CLI 之後，請執行 `az login` 以使用您的預設訂用帳戶登入。
 
 ## <a name="create-a-resource-group"></a>建立資源群組
 

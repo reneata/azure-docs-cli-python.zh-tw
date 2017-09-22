@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: a61f47076854d0ff0a7056f82240794b7533fe3e
-ms.sourcegitcommit: 3db5fb207db551a0d3fe0a88fe09e8f5e2ec184d
+ms.openlocfilehash: 580438bfc66f3ed0b4dad504258eab453b1b9183
+ms.sourcegitcommit: c1df7794ad42adb8640b51b630e4275f4a791ac2
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/14/2017
+ms.lasthandoff: 09/19/2017
 ---
 # <a name="install-azure-cli-20"></a>安裝 Azure CLI 2.0
 
@@ -29,6 +29,33 @@ ms.lasthandoff: 09/14/2017
 > 如果您需要舊版 Azure CLI，此處提供 [安裝 Azure CLI 1.0](/azure/cli-install-nodejs) 的方法。
 
 ## <a name="a-namemacosinstall-on-macos"></a><a name="macOS"/>在 MacOS 上安裝
+
+您可以在 macOS 上使用 [Homebrew](https://brew.sh/) 或手動安裝。
+
+### <a name="install-with-homebrew"></a>使用 Homebrew 安裝
+
+1. 如果您沒有 Homebrew，請依 [Homebrew 安裝指示](https://docs.brew.sh/Installation.html)安裝 Homebrew。
+
+2. 更新您的本機 Homebrew 存放庫。
+
+   ```bash
+   brew update
+   ```
+
+3. 安裝 `azure-cli` 套件。
+
+  ```bash
+  brew install azure-cli
+  ```
+
+> [!NOTE]
+> 若您之前使用 Homebrew 安裝 Azure CLI 1.0，而不是安裝套件，您可以透過一般的 Homebrew 升級程序取得 CLI 2.0。
+>
+> ```bash
+> brew upgrade
+> ```
+
+### <a name="install-manually"></a>手動安裝
 
 1. 使用 `curl` 安裝 Azure CLI 2.0。
 
@@ -220,12 +247,6 @@ CLI 會安裝在映像上，作為 `/usr/local/bin` 中的 `az` 命令。
 curl https://azurecliprod.blob.core.windows.net/install | bash
 ```
 
-### <a name="homebrew-on-macos-installing-older-version"></a>macOS 上安裝較舊版本的 Homebrew
-
-macOS 可用的 Homebrew `azure-cli` 公式目前已過期，且會安裝 CLI 的 1.x 版本。 您可以在更新時加以查看，方法是檢查 `brew info azure-cli`。
-
-在此之前，[解除安裝舊版](#uninstall_brew)並遵循 [macOS 安裝指示](#macOS)。
-
 ## <a name="uninstall-cli-1x-versions"></a>解除安裝 CLI 1.x 版本
 
 如果您的系統上可使用較舊的 CLI 1.x 版本，就能以所使用的安裝類型作為基礎加以解除安裝。
@@ -237,14 +258,6 @@ macOS 可用的 Homebrew `azure-cli` 公式目前已過期，且會安裝 CLI �
   ```bash
   npm uninstall -g azure-cli
   ```
-
-### <a name="a-nameuninstallbrewuninstall-with-homebrew-on-macos"></a><a name="uninstall_brew"/>使用 macOS 上的 Homebrew 解除安裝
-
-使用 `brew uninstall` 將舊版的 CLI 移除。
-
-```bash
-brew uninstall azure-cli
-```
 
 ### <a name="uninstall-with-distributable"></a>使用可散佈解除安裝
 
@@ -261,6 +274,20 @@ brew uninstall azure-cli
 ## <a name="update-the-cli"></a>更新 CLI
 
 若要更新 Azure CLI，請使用您用來安裝它的相同方法。
+
+### <a name="update-with-homebrew"></a>使用 Homebrew 更新
+
+1. 更新您的本機 Homebrew 存放庫資訊。
+
+   ```bash
+   brew update
+   ```
+
+2. 升級已安裝的套件。
+
+   ```bash
+   brew upgrade
+   ```
 
 ### <a name="update-with-msi"></a>使用 MSI 更新
 
@@ -318,6 +345,14 @@ brew uninstall azure-cli
 ## <a name="uninstall"></a>解除安裝
 
 如果您決定要將 CLI 解除安裝，我們很遺憾您不再繼續使用。 您應該使用您用來安裝 CLI 的相同方法來解除安裝。
+
+### <a name="uninstall-with-homebrew"></a>使用 Homebrew 解除安裝
+
+解除安裝 `azure-cli` 套件。
+
+   ```bash
+   brew uninstall azure-cli
+   ```
 
 ### <a name="uninstall-with-msi"></a>使用 MSI 解除安裝
 
