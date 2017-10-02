@@ -12,13 +12,73 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: ad30efeb7efafcc5816160ee130665d37adb62c6
-ms.sourcegitcommit: e866977985ba0286fa05f41729dd7e7d9ce86f8e
+ms.openlocfilehash: 72630c52b5e6afd69809ff19145717c0d65e0252
+ms.sourcegitcommit: 3a490ae3a2a1b2e63a062806f9b720fa4c6be01e
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/13/2017
+ms.lasthandoff: 09/25/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Azure CLI 2.0 版本資訊
+
+## <a name="september-22-2017"></a>2017 年 9 月 22 日
+
+版本 2.0.18
+
+### <a name="resource"></a>資源
+
+* 已新增顯示內建原則定義的支援
+* 已新增建立原則定義的支援模式參數
+* 已新增對於 `managedapp definition create` UI 定義及範本的支援
+* [重大變更] 已變更 `managedapp` 資源類型，從 `appliances` 變為 `applications`，且從 `applianceDefinitions` 變為 `applicationDefinitions`
+
+### <a name="network"></a>網路
+
+* 已新增可用性區域，以支援 `network lb` 和 `network public-ip` 子命令
+* 已新增對 `express-route` 的 IPv6 Microsoft 對等互連支援
+* 已新增 `asg` 應用程式安全性群組命令
+* 將 `--application-security-groups` 引數新增至 `nic [create|ip-config create|ip-config update]`
+* 已將 `--source-asgs` 和 `--destination-asgs` 引數新增至 `nsg rule [create|update]`
+* 已將 `--ddos-protection` 和 `--vm-protection` 引數新增至 `vnet [create|update]`
+* 已新增 `network [vnet-gateway|vpn-client|show-url]` 命令
+
+### <a name="storage"></a>儲存體
+
+* 已修正更新 SDK 後 `storage account network-rule` 命令可能會失敗的問題
+
+### <a name="eventgrid"></a>Eventgrid
+
+* 已更新 Azure Event Grid Python SDK 以使用較新的 API 版本 "2017-09-15-preview"
+
+### <a name="sql"></a>SQL
+
+* 已將 `sql server list` 引數 `--resource-group` 變更為可選。 如果未指定，會傳回訂用帳戶中所有的 sql 伺服器
+* 已將 `--no-wait` 參數新增至 `db [create|copy|restore|update|replica create|create|update]` 和 `dw [create|update]`
+
+### <a name="keyvault"></a>Keyvault
+
+* 已新增從 proxy 後方支援 Keyvault 命令
+
+### <a name="vm"></a>VM
+
+* 已新增 `[vm|vmss|disk] create` 的可用性區域支援
+* 已修正使用 `--app-gateway ID` 與 `vmss create` 會導致失敗的問題
+* 已將引數 `--asgs` 新增至 `vm create`
+* 已新增使用 `vm run-command` 在 VM 上執行命令的支援
+* [預覽] 已新增使用 `vmss encryption` 加密 VMSS 磁碟的支援
+* 已新增使用 `vm perform-maintenance` 在 VM 上執行維護工作的支援
+
+### <a name="acs"></a>ACS
+
+* [預覽] 已針對 ACS 預覽區域，將 `--orchestrator-release` 引數新增至 `acs create`
+
+### <a name="appservice"></a>AppService
+
+* 已新增使用 `webapp auth [update|show]` 更新並顯示驗證設定的功能
+
+### <a name="backup"></a>備份
+
+* 預覽版本
+
 
 ## <a name="september-11-2017"></a>2017 年 9 月 11 日
 

@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 580438bfc66f3ed0b4dad504258eab453b1b9183
-ms.sourcegitcommit: c1df7794ad42adb8640b51b630e4275f4a791ac2
+ms.openlocfilehash: 935814d56d0a6be00f626da860dc643adbf14804
+ms.sourcegitcommit: 9f38efbb7efd800ee5cab80d6641770d268c5a68
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/19/2017
+ms.lasthandoff: 09/22/2017
 ---
 # <a name="install-azure-cli-20"></a>安裝 Azure CLI 2.0
 
@@ -36,13 +36,15 @@ ms.lasthandoff: 09/19/2017
 
 1. 如果您沒有 Homebrew，請依 [Homebrew 安裝指示](https://docs.brew.sh/Installation.html)安裝 Homebrew。
 
-2. 更新您的本機 Homebrew 存放庫。
+2. 如果您先前曾手動安裝 CLI，請遵循[手動解除安裝](#UninstallManually)指示。
+
+3. 更新您的本機 Homebrew 存放庫。
 
    ```bash
    brew update
    ```
 
-3. 安裝 `azure-cli` 套件。
+4. 安裝 `azure-cli` 套件。
 
   ```bash
   brew install azure-cli
@@ -73,11 +75,9 @@ ms.lasthandoff: 09/19/2017
 
 ## <a name="install-on-windows"></a>在 Windows 上安裝
 
-您可以使用 MSI 來安裝 Azure CLI 2.0，然後在 Windows 命令列中使用它，或是使用 Windows 上 Ubuntu 之 Bash 上的 `apt-get` 來安裝 CLI。
-
 ### <a name="install-with-msi-for-the-windows-command-line"></a>使用適用於 Windows 命令列的 MSI 安裝 
 
-若要在 Windows 上安裝 CLI，然後在 Windows 命令列中使用它，請下載並執行 [MSI](https://aka.ms/InstallAzureCliWindows)。
+若要在 Windows 上安裝 CLI，並在 Windows 命令列中加以使用，請下載並執行 [Azure CLI 安裝程式 (MSI)](https://aka.ms/InstallAzureCliWindows)。
 
 ### <a name="install-with-apt-get-for-bash-on-ubuntu-on-windows"></a>使用 Windows 上 Ubuntu 之 Bash 的 apt-get 安裝
 
@@ -247,6 +247,16 @@ CLI 會安裝在映像上，作為 `/usr/local/bin` 中的 `az` 命令。
 curl https://azurecliprod.blob.core.windows.net/install | bash
 ```
 
+### <a name="az-command-not-found"></a>找不到 `az` 命令
+
+建議您清除 shell 命令雜湊快取。 執行
+
+```bash
+hash -r
+```
+
+並查看問題是否已解決。
+
 ## <a name="uninstall-cli-1x-versions"></a>解除安裝 CLI 1.x 版本
 
 如果您的系統上可使用較舊的 CLI 1.x 版本，就能以所使用的安裝類型作為基礎加以解除安裝。
@@ -261,7 +271,7 @@ curl https://azurecliprod.blob.core.windows.net/install | bash
 
 ### <a name="uninstall-with-distributable"></a>使用可散佈解除安裝
 
-如果您是透過 [MSI](http://aka.ms/webpi-azure-cli) 或 [macOS 套件](http://aka.ms/mac-azure-cli)安裝，請使用相同的工具將您的安裝移除。
+如果您是透過 [Azure CLI 安裝程式 (MSI)](http://aka.ms/webpi-azure-cli) 或 [macOS 套件](http://aka.ms/mac-azure-cli)安裝，請使用相同的工具移除您的安裝。
 
 ### <a name="uninstall-with-docker"></a>使用 Docker 解除安裝
 
@@ -277,13 +287,15 @@ curl https://azurecliprod.blob.core.windows.net/install | bash
 
 ### <a name="update-with-homebrew"></a>使用 Homebrew 更新
 
-1. 更新您的本機 Homebrew 存放庫資訊。
+1. 如果您先前以手動方式安裝，請遵循[使用 Homebrew 安裝](#macOS)的指示。
+
+2. 更新您的本機 Homebrew 存放庫資訊。
 
    ```bash
    brew update
    ```
 
-2. 升級已安裝的套件。
+3. 升級已安裝的套件。
 
    ```bash
    brew upgrade
@@ -291,7 +303,7 @@ curl https://azurecliprod.blob.core.windows.net/install | bash
 
 ### <a name="update-with-msi"></a>使用 MSI 更新
 
-再次執行 [MSI](https://aka.ms/InstallAzureCliWindows)。
+再次執行 [Azure CLI 安裝程式 (MSI)](https://aka.ms/InstallAzureCliWindows)。
 
 ### <a name="update-with-apt-get"></a>使用 apt-get 更新
 
@@ -396,7 +408,7 @@ curl https://azurecliprod.blob.core.windows.net/install | bash
 > [!NOTE]
 > 如果您已安裝特定版本的映像，就必須將 `:<version>` 新增至映像名稱的結尾。
 
-### <a name="uninstall-manually"></a>手動解除安裝
+###<a name="a-nameuninstallmanuallyuninstall-manually"></a><a name="UninstallManually"/>手動解除安裝
 
 如果您使用在 https://aka.ms/InstallAzureCli 的指令碼安裝 CLI，您可以利用下列步驟進行解除安裝。
 
