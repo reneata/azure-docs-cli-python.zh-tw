@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 935814d56d0a6be00f626da860dc643adbf14804
-ms.sourcegitcommit: 9f38efbb7efd800ee5cab80d6641770d268c5a68
+ms.openlocfilehash: 1b47bd5603f5214dd11d772caaebe8cf380df5c0
+ms.sourcegitcommit: 5e862fd0a93cf668fa76a74ae1c7505d3c8c45f2
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 10/09/2017
 ---
 # <a name="install-azure-cli-20"></a>安裝 Azure CLI 2.0
 
@@ -104,7 +104,10 @@ ms.lasthandoff: 09/22/2017
 
 ## <a name="install-on-debianubuntu-with-apt-get"></a>使用 apt get 在 Debian/Ubuntu 上安裝
 
-以 Debian/Ubuntu 為基礎的系統，您可以透過 `apt-get` 安裝 Azure CLI 2.0。
+針對使用 `apt` 套件管理員的散發套件，您可以透過 `apt-get` 來安裝 Azure CLI 2.0。
+
+> [!NOTE]
+> 您的散發套件必須支援 Python 2.7.x 或 Python 3.x，才能使用 CLI。
 
 1. 修改來源清單：
  
@@ -134,7 +137,10 @@ ms.lasthandoff: 09/22/2017
 
 ## <a name="install-on-rhel-fedora-and-centos-with-yum"></a>安裝於 RHEL、Fedora 及 CentOS 搭配 Yum
 
-對於任何以 RedHat 為基礎且包含 `yum` 套件管理員的散發套件，您可以透過 `yum` 安裝 Azure CLI 2.0。
+針對使用 `yum` 套件管理員的散發套件，您可以透過 `yum` 來安裝 Azure CLI 2.0。
+
+> [!NOTE]
+> 您的散發套件必須支援 Python 2.7.x 或 Python 3.x，才能使用 CLI。
 
 1. 匯入 Microsoft 存放庫金鑰：
 
@@ -158,6 +164,11 @@ ms.lasthandoff: 09/22/2017
 4. 從具有 `az` 命令的命令提示字元中執行 CLI。
 
 ## <a name="install-on-opensuse-and-sle-with-zypper"></a>安裝於 openSUSE 和 SLE 搭配 Zypper
+
+針對使用 `zypper` 套件管理員的散發套件，您可以透過 `zypper` 來安裝 Azure CLI 2.0。
+
+> [!NOTE]
+> 您的散發套件必須支援 Python 2.7.x 或 Python 3.x，才能使用 CLI。
 
 1. 匯入 Microsoft 存放庫金鑰：
 
@@ -201,9 +212,9 @@ CLI 會安裝在映像上，作為 `/usr/local/bin` 中的 `az` 命令。
 > docker run -v ${HOME}:/root azuresdk/azure-cli-python:<version>
 > ```
 
-## <a name="a-namelinuxinstall-on-linux-without-apt-get"></a><a name="Linux"/>不使用 apt-get 在 Linux 安裝
+## <a name="a-namelinuxinstall-on-linux-without-a-package-manager"></a><a name="Linux"/>不使用套件管理員在 Linux 上安裝
 
-如果可行，建議您使用套件管理員安裝 CLI。 針對不需要使用套件的散發套件，您可以手動方式來安裝。
+如果可行，建議您使用套件管理員安裝 CLI。 如果您不希望新增 Microsoft 的存放庫，或搭配使用的散發套件並未提供套件，則可以手動安裝 CLI。
 
 1. 以您的 Linux 散發套件作為基礎安裝必要條件。
 
@@ -219,7 +230,7 @@ CLI 會安裝在映像上，作為 `/usr/local/bin` 中的 `az` 命令。
    SUSE OpenSUSE 13.2    | sudo zypper refresh && sudo zypper --non-interactive install curl gcc python python-xml libffi-devel python-devel openssl-devel
    ```
 
-如果以上未列出您的散發套件，就必須安裝 [Python](https://www.python.org/downloads/)、[libffi](https://sourceware.org/libffi/) 和 [OpenSSL](https://www.openssl.org/source/)。
+如果以上未列出您的散發套件，就必須安裝 [Python 2.7 或更新版本](https://www.python.org/downloads/)、[libffi](https://sourceware.org/libffi/) 和 [OpenSSL](https://www.openssl.org/source/)。
 
 2. 使用 `curl` 安裝 CLI。
 
@@ -420,6 +431,12 @@ hash -r
    ```
 
 2. 將 `<install location>/lib/azure-cli/az.completion` 行從 `<install location>/.bash_profile` 刪除。
+
+3. 如果您的殼層使用命令快取，請將它重新載入。
+
+   ```bash
+   hash -r
+   ```
 
 > [!Note]
 > 預設安裝位置是 `/Users/<username>`。

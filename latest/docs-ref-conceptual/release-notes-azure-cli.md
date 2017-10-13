@@ -12,13 +12,71 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: 72630c52b5e6afd69809ff19145717c0d65e0252
-ms.sourcegitcommit: 3a490ae3a2a1b2e63a062806f9b720fa4c6be01e
+ms.openlocfilehash: 2ea9daa558200204750f19b5d22685587ff097ef
+ms.sourcegitcommit: 376bc0601aba890630dadd55908c1a65ddf40f5a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/25/2017
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Azure CLI 2.0 版本資訊
+
+## <a name="october-9-2017"></a>2017 年 10 月 9 日
+
+版本 2.0.19
+
+### <a name="core"></a>核心
+
+* 新增在 Azure Stack 中在結尾處使用斜線處理 ADFS 授權 URL 的方式
+
+### <a name="appservice"></a>AppService
+
+* 新增新命令`webapp update` 的一般更新
+
+### <a name="batch"></a>批次
+
+* 更新為 Batch SDK 4.0.0
+* 更新 VirtualMachineConfiguration 的 `--image` 選項以支援 publish:offer:sku:version 以外的 ARM 映像參考
+* 新增 Batch 延伸模組命令的新 CLI 延伸模型支援
+* 移除元件模型中的 Batch 支援
+
+### <a name="batchai"></a>Batchai
+
+* Batch AI 模組的初始版本
+
+### <a name="keyvault"></a>Keyvault
+
+* 修正在 Azure Stack 上使用 ADFS 時，Key Vault 驗證的問題。 [(#4448)](https://github.com/Azure/azure-cli/issues/4448)
+
+### <a name="network"></a>網路
+
+* 將 `application-gateway address-pool create` 的 `--server` 引數變更為可選用，以允許空白的位址集區
+* 更新 `traffic-manager` 以支援最新功能
+
+### <a name="resource"></a>資源
+
+* 新增 `--resource-group/-g` 選項的支援，將資源群組名稱變更為 `group`
+* 新增 `account lock` 命令以搭配訂用帳戶層級鎖定使用
+* 新增 `group lock` 命令以搭配群組層級鎖定使用
+* 新增 `resource lock` 命令以搭配資源層級鎖定使用
+
+### <a name="sql"></a>Sql
+
+* 新增使用「攜帶您自己的金鑰」進行 SQL 透明資料加密 (TDE) 和 TDE 的支援
+* 新增 `db list-deleted` 命令和 `db restore --deleted-time` 參數，以便尋找和還原已刪除的資料庫
+* 新增 `db op list` 和 `db op cancel`，提供在資料庫上列出清單和取消處理中作業的功能
+
+### <a name="storage"></a>儲存體
+
+* 新增檔案共用快照集的支援
+
+### <a name="vm"></a>VM
+
+* 修正 `vm show` 中使用 `-d` 導致遺漏私人 IP 位址所造成的損毀
+* [預覽] 新增輪流升級至`vmss create` 的支援
+* 新增使用 `vm encryption enable` 更新加密設定的支援
+* 在 `vm create` 中新增 `--os-disk-size-gb` 參數
+* 在 `vmss create` 中新增適用於 Windows 的 `--license-type` 參數
+
 
 ## <a name="september-22-2017"></a>2017 年 9 月 22 日
 
