@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 1b47bd5603f5214dd11d772caaebe8cf380df5c0
-ms.sourcegitcommit: 5e862fd0a93cf668fa76a74ae1c7505d3c8c45f2
+ms.openlocfilehash: 4703a192e23b04d0ad42daf60e415d798610cce0
+ms.sourcegitcommit: 932cc86172ab55c00346f62504787c096ed7b2bd
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/09/2017
+ms.lasthandoff: 10/24/2017
 ---
 # <a name="install-azure-cli-20"></a>安裝 Azure CLI 2.0
 
@@ -95,7 +95,7 @@ ms.lasthandoff: 10/09/2017
 4. 執行下列 sudo 命令：
 
    ```bash
-   sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
+   sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
    sudo apt-get install apt-transport-https
    sudo apt-get update && sudo apt-get install azure-cli
    ```
@@ -128,7 +128,7 @@ ms.lasthandoff: 10/09/2017
 2. 執行下列 sudo 命令：
 
    ```bash
-   sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893
+   sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
    sudo apt-get install apt-transport-https
    sudo apt-get update && sudo apt-get install azure-cli
    ```
@@ -198,7 +198,7 @@ ms.lasthandoff: 10/09/2017
 使用 `docker run` 安裝 CLI。
 
    ```bash
-   docker run azuresdk/azure-cli-python:<version>
+   docker run -it azuresdk/azure-cli-python:<version>
    ```
 
 請參閱我們的 [Docker 標籤](https://hub.docker.com/r/azuresdk/azure-cli-python/tags/)，以取得可用的版本。
@@ -209,7 +209,7 @@ CLI 會安裝在映像上，作為 `/usr/local/bin` 中的 `az` 命令。
 > 如果您想要從使用者環境挑選 SSH 金鑰，可以使用 `-v ${HOME}:/root` 來裝載 $HOME 作為 `/root`。
 
 > ```bash
-> docker run -v ${HOME}:/root azuresdk/azure-cli-python:<version>
+> docker run -it -v ${HOME}:/root azuresdk/azure-cli-python:<version>
 > ```
 
 ## <a name="a-namelinuxinstall-on-linux-without-a-package-manager"></a><a name="Linux"/>不使用套件管理員在 Linux 上安裝
