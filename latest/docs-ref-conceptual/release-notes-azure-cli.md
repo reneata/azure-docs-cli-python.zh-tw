@@ -12,13 +12,54 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: 2ea9daa558200204750f19b5d22685587ff097ef
-ms.sourcegitcommit: 376bc0601aba890630dadd55908c1a65ddf40f5a
+ms.openlocfilehash: 429b099dabd27d9356e88791f955ec52acd2a5f9
+ms.sourcegitcommit: 9b36c15dc0e10024e23b8018604f5ef63c025de1
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/11/2017
+ms.lasthandoff: 10/24/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Azure CLI 2.0 版本資訊
+
+## <a name="october-24-2017"></a>2017 年 10 月 24 日
+
+版本 2.0.20
+
+### <a name="core"></a>核心
+
+* 將 `2017-03-09-profile` 更新為取用 `MGMT_STORAGE` API 版本 `2016-01-01`
+
+### <a name="acr"></a>ACR
+
+* 已將資源管理更新為指向`2017-10-01` API 版本
+* 已將「自備儲存體」SKU 變更為「傳統」
+* 已將「登錄 SKU」重新命名為「基本」、「標準」和「進階」
+
+### <a name="acs"></a>ACS
+
+* [預覽] 已新增 `az aks` 命令
+* 已修正 Kubernetes `get-credentials`
+
+### <a name="appservice"></a>AppService
+
+* 已修正下載的 `webapp` 記錄可能無效的問題
+
+### <a name="component"></a>元件
+
+* 已為所有的安裝程式和確認提示新增更清楚的取代訊息
+
+### <a name="monitor"></a>監視
+
+* 已新增 `action-group` 命令
+
+### <a name="resource"></a>資源
+
+* 已修正與 `group export` 中最新版本 msrest 相依性不相容的問題
+* 已修正 `policy assignment create` 以與內建的原則定義和原則集合定義搭配使用
+
+### <a name="vm"></a>VM
+
+* 已將引數 `--accelerated-networking` 新增至 `vmss create`
+
 
 ## <a name="october-9-2017"></a>2017 年 10 月 9 日
 
