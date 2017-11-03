@@ -12,45 +12,45 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: fab89cb8-dac1-4e21-9d34-5eadd5213c05
-ms.openlocfilehash: 5ae8af014b821fe5297ea44056ef33c4570d1d47
-ms.sourcegitcommit: 5cfbea569fef193044da712708bc6957d3fb557c
+ms.openlocfilehash: a6ad5611f3e507b65e160122c87e22ec44546588
+ms.sourcegitcommit: e8fe15e4f7725302939d726c75ba0fb3cad430be
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/14/2017
+ms.lasthandoff: 10/27/2017
 ---
-# <a name="create-an-azure-service-principal-with-azure-cli-20"></a><span data-ttu-id="0be4b-104">使用 Azure CLI 2.0 來建立 Azure 服務主體</span><span class="sxs-lookup"><span data-stu-id="0be4b-104">Create an Azure service principal with Azure CLI 2.0</span></span>
+# <a name="create-an-azure-service-principal-with-azure-cli-20"></a><span data-ttu-id="681a0-104">使用 Azure CLI 2.0 來建立 Azure 服務主體</span><span class="sxs-lookup"><span data-stu-id="681a0-104">Create an Azure service principal with Azure CLI 2.0</span></span>
 
-<span data-ttu-id="0be4b-105">如果您打算使用 Azure CLI 2.0 來管理應用程式或服務，請根據 Azure Active Directory (AAD) 服務主體 (而非您自己的認證) 來執行它。</span><span class="sxs-lookup"><span data-stu-id="0be4b-105">If you plan to manage your app or service with Azure CLI 2.0, you should run it under an Azure Active Directory (AAD) service principal rather than your own credentials.</span></span>
-<span data-ttu-id="0be4b-106">本主題會逐步引導您使用 Azure CLI 2.0 來建立安全性主體。</span><span class="sxs-lookup"><span data-stu-id="0be4b-106">This topic steps you through creating a security principal with Azure CLI 2.0.</span></span>
+<span data-ttu-id="681a0-105">如果您打算使用 Azure CLI 2.0 來管理應用程式或服務，請根據 Azure Active Directory (AAD) 服務主體 (而非您自己的認證) 來執行它。</span><span class="sxs-lookup"><span data-stu-id="681a0-105">If you plan to manage your app or service with Azure CLI 2.0, you should run it under an Azure Active Directory (AAD) service principal rather than your own credentials.</span></span>
+<span data-ttu-id="681a0-106">本主題會逐步引導您使用 Azure CLI 2.0 來建立安全性主體。</span><span class="sxs-lookup"><span data-stu-id="681a0-106">This topic steps you through creating a security principal with Azure CLI 2.0.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="0be4b-107">您也可以透過 Azure 入口網站來建立服務主體。</span><span class="sxs-lookup"><span data-stu-id="0be4b-107">You can also create a service principal through the Azure portal.</span></span>
-> <span data-ttu-id="0be4b-108">如需詳細資訊，請閱讀[使用入口網站來建立可存取資源的 Active Directory 應用程式和服務主體](/azure/azure-resource-manager/resource-group-create-service-principal-portal)。</span><span class="sxs-lookup"><span data-stu-id="0be4b-108">Read [Use portal to create Active Directory application and service principal that can access resources](/azure/azure-resource-manager/resource-group-create-service-principal-portal) for more details.</span></span>
+> <span data-ttu-id="681a0-107">您也可以透過 Azure 入口網站來建立服務主體。</span><span class="sxs-lookup"><span data-stu-id="681a0-107">You can also create a service principal through the Azure portal.</span></span>
+> <span data-ttu-id="681a0-108">如需詳細資訊，請閱讀[使用入口網站來建立可存取資源的 Active Directory 應用程式和服務主體](/azure/azure-resource-manager/resource-group-create-service-principal-portal)。</span><span class="sxs-lookup"><span data-stu-id="681a0-108">Read [Use portal to create Active Directory application and service principal that can access resources](/azure/azure-resource-manager/resource-group-create-service-principal-portal) for more details.</span></span>
 
-## <a name="what-is-a-service-principal"></a><span data-ttu-id="0be4b-109">何謂「服務主體」？</span><span class="sxs-lookup"><span data-stu-id="0be4b-109">What is a 'service principal'?</span></span>
+## <a name="what-is-a-service-principal"></a><span data-ttu-id="681a0-109">何謂「服務主體」？</span><span class="sxs-lookup"><span data-stu-id="681a0-109">What is a 'service principal'?</span></span>
 
-<span data-ttu-id="0be4b-110">Azure 服務主體是一項安全性識別，可供使用者所建立的應用程式、服務和自動化工具用來存取特定 Azure 資源。</span><span class="sxs-lookup"><span data-stu-id="0be4b-110">An Azure service principal is a security identity used by user-created apps, services, and automation tools to access specific Azure resources.</span></span> <span data-ttu-id="0be4b-111">您可以把它想成是具有特定角色的「使用者識別」(登入和密碼或憑證)，並具有受到嚴格控制的資源存取權限。</span><span class="sxs-lookup"><span data-stu-id="0be4b-111">Think of it as a 'user identity' (login and password or certificate) with a specific role, and tightly controlled permissions to access your resources.</span></span> <span data-ttu-id="0be4b-112">不同於一般的使用者識別，服務主體只需要能夠執行特定動作。</span><span class="sxs-lookup"><span data-stu-id="0be4b-112">It only needs to be able to do specific things, unlike a general user identity.</span></span> <span data-ttu-id="0be4b-113">如果您只對服務主體授與它為了執行管理工作所需要的最低權限等級，它就能提高安全性。</span><span class="sxs-lookup"><span data-stu-id="0be4b-113">It improves security if you only grant it the minimum permissions level needed to perform its management tasks.</span></span> 
+<span data-ttu-id="681a0-110">Azure 服務主體是一項安全性識別，可供使用者所建立的應用程式、服務和自動化工具用來存取特定 Azure 資源。</span><span class="sxs-lookup"><span data-stu-id="681a0-110">An Azure service principal is a security identity used by user-created apps, services, and automation tools to access specific Azure resources.</span></span> <span data-ttu-id="681a0-111">您可以把它想成是具有特定角色的「使用者識別」(登入和密碼或憑證)，並具有受到嚴格控制的資源存取權限。</span><span class="sxs-lookup"><span data-stu-id="681a0-111">Think of it as a 'user identity' (login and password or certificate) with a specific role, and tightly controlled permissions to access your resources.</span></span> <span data-ttu-id="681a0-112">不同於一般的使用者識別，服務主體只需要能夠執行特定動作。</span><span class="sxs-lookup"><span data-stu-id="681a0-112">It only needs to be able to do specific things, unlike a general user identity.</span></span> <span data-ttu-id="681a0-113">如果您只對服務主體授與它為了執行管理工作所需要的最低權限等級，它就能提高安全性。</span><span class="sxs-lookup"><span data-stu-id="681a0-113">It improves security if you only grant it the minimum permissions level needed to perform its management tasks.</span></span> 
 
-<span data-ttu-id="0be4b-114">Azure CLI 2.0 支援建立以密碼為基礎的驗證認證，以及以憑證認證。</span><span class="sxs-lookup"><span data-stu-id="0be4b-114">Azure CLI 2.0 supports the creation of password-based authentication credentials and certificate credentials.</span></span> <span data-ttu-id="0be4b-115">在本主題中，我們將討論這兩種認證。</span><span class="sxs-lookup"><span data-stu-id="0be4b-115">In this topic, we cover both types of credentials.</span></span>
+<span data-ttu-id="681a0-114">Azure CLI 2.0 支援建立以密碼為基礎的驗證認證，以及以憑證認證。</span><span class="sxs-lookup"><span data-stu-id="681a0-114">Azure CLI 2.0 supports the creation of password-based authentication credentials and certificate credentials.</span></span> <span data-ttu-id="681a0-115">在本主題中，我們將討論這兩種認證。</span><span class="sxs-lookup"><span data-stu-id="681a0-115">In this topic, we cover both types of credentials.</span></span>
 
-## <a name="verify-your-own-permission-level"></a><span data-ttu-id="0be4b-116">確認您自己的權限等級</span><span class="sxs-lookup"><span data-stu-id="0be4b-116">Verify your own permission level</span></span>
+## <a name="verify-your-own-permission-level"></a><span data-ttu-id="681a0-116">確認您自己的權限等級</span><span class="sxs-lookup"><span data-stu-id="681a0-116">Verify your own permission level</span></span>
 
-<span data-ttu-id="0be4b-117">首先，您在 Azure Active Directory 和 Azure 訂用帳戶中都必須有足夠的權限。</span><span class="sxs-lookup"><span data-stu-id="0be4b-117">First, you must have sufficient permissions in both your Azure Active Directory and your Azure subscription.</span></span> <span data-ttu-id="0be4b-118">具體來說，您必須能夠在 Active Directory 中建立應用程式，並將角色指派給服務主體。</span><span class="sxs-lookup"><span data-stu-id="0be4b-118">Specifically, you must be able to create an app in the Active Directory, and assign a role to the service principal.</span></span> 
+<span data-ttu-id="681a0-117">首先，您在 Azure Active Directory 和 Azure 訂用帳戶中都必須有足夠的權限。</span><span class="sxs-lookup"><span data-stu-id="681a0-117">First, you must have sufficient permissions in both your Azure Active Directory and your Azure subscription.</span></span> <span data-ttu-id="681a0-118">具體來說，您必須能夠在 Active Directory 中建立應用程式，並將角色指派給服務主體。</span><span class="sxs-lookup"><span data-stu-id="681a0-118">Specifically, you must be able to create an app in the Active Directory, and assign a role to the service principal.</span></span> 
 
-<span data-ttu-id="0be4b-119">檢查您的帳戶是否具有足夠的權限，最簡單的方式是透過入口網站。</span><span class="sxs-lookup"><span data-stu-id="0be4b-119">The easiest way to check whether your account has adequate permissions is through the portal.</span></span> <span data-ttu-id="0be4b-120">請參閱[在入口網站中檢查必要的權限](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions)。</span><span class="sxs-lookup"><span data-stu-id="0be4b-120">See [Check required permission in portal](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions).</span></span>
+<span data-ttu-id="681a0-119">檢查您的帳戶是否具有足夠的權限，最簡單的方式是透過入口網站。</span><span class="sxs-lookup"><span data-stu-id="681a0-119">The easiest way to check whether your account has adequate permissions is through the portal.</span></span> <span data-ttu-id="681a0-120">請參閱[在入口網站中檢查必要的權限](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions)。</span><span class="sxs-lookup"><span data-stu-id="681a0-120">See [Check required permission in portal](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions).</span></span>
 
-## <a name="create-a-service-principal-for-your-application"></a><span data-ttu-id="0be4b-121">建立應用程式的服務主體</span><span class="sxs-lookup"><span data-stu-id="0be4b-121">Create a service principal for your application</span></span>
+## <a name="create-a-service-principal-for-your-application"></a><span data-ttu-id="681a0-121">建立應用程式的服務主體</span><span class="sxs-lookup"><span data-stu-id="681a0-121">Create a service principal for your application</span></span>
 
-<span data-ttu-id="0be4b-122">如需識別您想要建立服務主體的應用程式，您必須具有下列其中一項︰</span><span class="sxs-lookup"><span data-stu-id="0be4b-122">You must have one of the following to identify the app you want to create a service principal for:</span></span>
+<span data-ttu-id="681a0-122">如需識別您想要建立服務主體的應用程式，您必須具有下列其中一項︰</span><span class="sxs-lookup"><span data-stu-id="681a0-122">You must have one of the following to identify the app you want to create a service principal for:</span></span>
 
-  * <span data-ttu-id="0be4b-123">已部署之應用程式的唯一名稱或 URI (例如範例中的 "MyDemoWebApp")，或是</span><span class="sxs-lookup"><span data-stu-id="0be4b-123">The unique name or URI of your deployed app (such as "MyDemoWebApp" in the examples), or</span></span>
-  * <span data-ttu-id="0be4b-124">應用程式識別碼；與您已部署的應用程式、服務或物件相關聯的唯一 GUID</span><span class="sxs-lookup"><span data-stu-id="0be4b-124">the Application ID, the unique GUID associated with your deployed app, service, or object</span></span>
+  * <span data-ttu-id="681a0-123">已部署之應用程式的唯一名稱或 URI (例如範例中的 "MyDemoWebApp")，或是</span><span class="sxs-lookup"><span data-stu-id="681a0-123">The unique name or URI of your deployed app (such as "MyDemoWebApp" in the examples), or</span></span>
+  * <span data-ttu-id="681a0-124">應用程式識別碼；與您已部署的應用程式、服務或物件相關聯的唯一 GUID</span><span class="sxs-lookup"><span data-stu-id="681a0-124">the Application ID, the unique GUID associated with your deployed app, service, or object</span></span>
 
-<span data-ttu-id="0be4b-125">建立服務主體時，這些值會識別您的應用程式。</span><span class="sxs-lookup"><span data-stu-id="0be4b-125">These values identify your application when creating a service principal.</span></span>
+<span data-ttu-id="681a0-125">建立服務主體時，這些值會識別您的應用程式。</span><span class="sxs-lookup"><span data-stu-id="681a0-125">These values identify your application when creating a service principal.</span></span>
 
-### <a name="get-information-about-your-application"></a><span data-ttu-id="0be4b-126">取得應用程式的相關資訊</span><span class="sxs-lookup"><span data-stu-id="0be4b-126">Get information about your application</span></span>
+### <a name="get-information-about-your-application"></a><span data-ttu-id="681a0-126">取得應用程式的相關資訊</span><span class="sxs-lookup"><span data-stu-id="681a0-126">Get information about your application</span></span>
 
-<span data-ttu-id="0be4b-127">使用 `az ad app list` 來取得您應用程式的身分識別資訊。</span><span class="sxs-lookup"><span data-stu-id="0be4b-127">Get identity information about your application with the `az ad app list`.</span></span>
+<span data-ttu-id="681a0-127">使用 `az ad app list` 來取得您應用程式的身分識別資訊。</span><span class="sxs-lookup"><span data-stu-id="681a0-127">Get identity information about your application with the `az ad app list`.</span></span>
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
@@ -74,11 +74,11 @@ az ad app list --display-name MyDemoWebApp
   }
 ```
 
-<span data-ttu-id="0be4b-128">`--display-name` 選項會篩選傳回的應用程式清單，來顯示以 MyDemoWebApp 為開頭且具有 `displayName` 的項目。</span><span class="sxs-lookup"><span data-stu-id="0be4b-128">The `--display-name` option filters the returned list of apps to show those with `displayName` starting with MyDemoWebApp.</span></span>
+<span data-ttu-id="681a0-128">`--display-name` 選項會篩選傳回的應用程式清單，來顯示以 MyDemoWebApp 為開頭且具有 `displayName` 的項目。</span><span class="sxs-lookup"><span data-stu-id="681a0-128">The `--display-name` option filters the returned list of apps to show those with `displayName` starting with MyDemoWebApp.</span></span>
 
-### <a name="create-a-service-principal-with-a-password"></a><span data-ttu-id="0be4b-129">使用密碼建立服務主體</span><span class="sxs-lookup"><span data-stu-id="0be4b-129">Create a service principal with a password</span></span>
+### <a name="create-a-service-principal-with-a-password"></a><span data-ttu-id="681a0-129">使用密碼建立服務主體</span><span class="sxs-lookup"><span data-stu-id="681a0-129">Create a service principal with a password</span></span>
 
-<span data-ttu-id="0be4b-130">使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 和 `--password` 參數，透過密碼建立服務主題。</span><span class="sxs-lookup"><span data-stu-id="0be4b-130">Use [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) and the `--password` parameter to create the service principal with a password.</span></span> <span data-ttu-id="0be4b-131">若未提供角色或範圍，則目前的訂用帳戶會預設為**參與者**角色。</span><span class="sxs-lookup"><span data-stu-id="0be4b-131">When you do not provide a role or scope, it defaults to the **Contributor** role for the current subcription.</span></span> <span data-ttu-id="0be4b-132">若您使用 `--password` 或 `--cert` 參數建立服務主體，則會使用密碼驗證，則系統會產生一組密碼給您。</span><span class="sxs-lookup"><span data-stu-id="0be4b-132">If you create a service principal without using either the `--password` or `--cert` parameter, password authentication is used and a password is generated for you.</span></span>
+<span data-ttu-id="681a0-130">使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 和 `--password` 參數，透過密碼建立服務主題。</span><span class="sxs-lookup"><span data-stu-id="681a0-130">Use [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) and the `--password` parameter to create the service principal with a password.</span></span> <span data-ttu-id="681a0-131">若未提供角色或範圍，則目前的訂用帳戶會預設為**參與者**角色。</span><span class="sxs-lookup"><span data-stu-id="681a0-131">When you do not provide a role or scope, it defaults to the **Contributor** role for the current subscription.</span></span> <span data-ttu-id="681a0-132">若您使用 `--password` 或 `--cert` 參數建立服務主體，則會使用密碼驗證，則系統會產生一組密碼給您。</span><span class="sxs-lookup"><span data-stu-id="681a0-132">If you create a service principal without using either the `--password` or `--cert` parameter, password authentication is used and a password is generated for you.</span></span>
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name {appId} --password "{strong password}" 
@@ -95,11 +95,11 @@ az ad sp create-for-rbac --name {appId} --password "{strong password}"
 ```
 
  > [!WARNING] 
- > <span data-ttu-id="0be4b-133">請勿建立不安全的密碼。</span><span class="sxs-lookup"><span data-stu-id="0be4b-133">Don't create an insecure password.</span></span>  <span data-ttu-id="0be4b-134">請依照 [Azure AD 密碼規則和限制](/azure/active-directory/active-directory-passwords-policy)指引。</span><span class="sxs-lookup"><span data-stu-id="0be4b-134">Follow the [Azure AD password rules and restrictions](/azure/active-directory/active-directory-passwords-policy) guidance.</span></span>
+ > <span data-ttu-id="681a0-133">請勿建立不安全的密碼。</span><span class="sxs-lookup"><span data-stu-id="681a0-133">Don't create an insecure password.</span></span>  <span data-ttu-id="681a0-134">請依照 [Azure AD 密碼規則和限制](/azure/active-directory/active-directory-passwords-policy)指引。</span><span class="sxs-lookup"><span data-stu-id="681a0-134">Follow the [Azure AD password rules and restrictions](/azure/active-directory/active-directory-passwords-policy) guidance.</span></span>
 
-### <a name="create-a-service-principal-with-a-self-signed-certificate"></a><span data-ttu-id="0be4b-135">使用自我簽署憑證建立服務主體</span><span class="sxs-lookup"><span data-stu-id="0be4b-135">Create a service principal with a self-signed certificate</span></span>
+### <a name="create-a-service-principal-with-a-self-signed-certificate"></a><span data-ttu-id="681a0-135">使用自我簽署憑證建立服務主體</span><span class="sxs-lookup"><span data-stu-id="681a0-135">Create a service principal with a self-signed certificate</span></span>
 
-<span data-ttu-id="0be4b-136">使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 和 `--create-cert` 參數建立自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="0be4b-136">Use [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) and the `--create-cert` parameter to create a self-signed certificate.</span></span>
+<span data-ttu-id="681a0-136">使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 和 `--create-cert` 參數建立自我簽署憑證。</span><span class="sxs-lookup"><span data-stu-id="681a0-136">Use [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) and the `--create-cert` parameter to create a self-signed certificate.</span></span>
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name {appId} --create-cert
@@ -116,11 +116,11 @@ az ad sp create-for-rbac --name {appId} --create-cert
 }
 ```
 
-<span data-ttu-id="0be4b-137">複製 `fileWithCertAndPrivateKey` 回應的值。</span><span class="sxs-lookup"><span data-stu-id="0be4b-137">Copy the value of the `fileWithCertAndPrivateKey` response.</span></span> <span data-ttu-id="0be4b-138">這是驗證會使用的憑證檔案。</span><span class="sxs-lookup"><span data-stu-id="0be4b-138">This is the certificate file which will be used for authentication.</span></span>
+<span data-ttu-id="681a0-137">複製 `fileWithCertAndPrivateKey` 回應的值。</span><span class="sxs-lookup"><span data-stu-id="681a0-137">Copy the value of the `fileWithCertAndPrivateKey` response.</span></span> <span data-ttu-id="681a0-138">這是驗證會使用的憑證檔案。</span><span class="sxs-lookup"><span data-stu-id="681a0-138">This is the certificate file which will be used for authentication.</span></span>
 
-<span data-ttu-id="0be4b-139">如需使用憑證的更多選項，請參閱 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac)。</span><span class="sxs-lookup"><span data-stu-id="0be4b-139">For more options when using certificates, see [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac).</span></span>
+<span data-ttu-id="681a0-139">如需使用憑證的更多選項，請參閱 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac)。</span><span class="sxs-lookup"><span data-stu-id="681a0-139">For more options when using certificates, see [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac).</span></span>
 
-### <a name="get-information-about-the-service-principal"></a><span data-ttu-id="0be4b-140">取得服務主體的相關資訊</span><span class="sxs-lookup"><span data-stu-id="0be4b-140">Get information about the service principal</span></span>
+### <a name="get-information-about-the-service-principal"></a><span data-ttu-id="681a0-140">取得服務主體的相關資訊</span><span class="sxs-lookup"><span data-stu-id="681a0-140">Get information about the service principal</span></span>
 
 ```azurecli-interactive
 az ad sp show --id a487e0c1-82af-47d9-9a0b-af184eb87646d
@@ -139,15 +139,15 @@ az ad sp show --id a487e0c1-82af-47d9-9a0b-af184eb87646d
 }
 ```
 
-### <a name="sign-in-using-the-service-principal"></a><span data-ttu-id="0be4b-141">使用服務主體來登入</span><span class="sxs-lookup"><span data-stu-id="0be4b-141">Sign in using the service principal</span></span>
+### <a name="sign-in-using-the-service-principal"></a><span data-ttu-id="681a0-141">使用服務主體來登入</span><span class="sxs-lookup"><span data-stu-id="681a0-141">Sign in using the service principal</span></span>
 
-<span data-ttu-id="0be4b-142">您現在可以使用 `az ad sp show` 的 *appId*，或*密碼*或已建立憑證的路徑，以新服務主體登入您的應用程式。</span><span class="sxs-lookup"><span data-stu-id="0be4b-142">You can now log in as the new service principal for your app using the *appId* from `az ad sp show`, and either the *password* or the path to the created certificate.</span></span>  <span data-ttu-id="0be4b-143">提供 `az ad sp create-for-rbac` 結果中的租用戶值。</span><span class="sxs-lookup"><span data-stu-id="0be4b-143">Supply the *tenant* value from the results of `az ad sp create-for-rbac`.</span></span>
+<span data-ttu-id="681a0-142">您現在可以使用 `az ad sp show` 的 *appId*，或*密碼*或已建立憑證的路徑，以新服務主體登入您的應用程式。</span><span class="sxs-lookup"><span data-stu-id="681a0-142">You can now log in as the new service principal for your app using the *appId* from `az ad sp show`, and either the *password* or the path to the created certificate.</span></span>  <span data-ttu-id="681a0-143">提供 `az ad sp create-for-rbac` 結果中的租用戶值。</span><span class="sxs-lookup"><span data-stu-id="681a0-143">Supply the *tenant* value from the results of `az ad sp create-for-rbac`.</span></span>
 
 ```azurecli-interactive
 az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password {password-or-path-to-cert} --tenant {tenant}
 ``` 
 
-<span data-ttu-id="0be4b-144">成功登入之後，您會看到此輸出︰</span><span class="sxs-lookup"><span data-stu-id="0be4b-144">You will see this output after a successful sign-on:</span></span>
+<span data-ttu-id="681a0-144">成功登入之後，您會看到此輸出︰</span><span class="sxs-lookup"><span data-stu-id="681a0-144">You will see this output after a successful sign-on:</span></span>
 
 ```json
 [
@@ -165,31 +165,31 @@ az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password
 ]
 ```
 
-<span data-ttu-id="0be4b-145">使用 `id`、`password` 和 `tenant` 值，作為執行您應用程式的認證。</span><span class="sxs-lookup"><span data-stu-id="0be4b-145">Use the `id`, `password`, and `tenant` values as the credentials for running your app.</span></span> 
+<span data-ttu-id="681a0-145">使用 `id`、`password` 和 `tenant` 值，作為執行您應用程式的認證。</span><span class="sxs-lookup"><span data-stu-id="681a0-145">Use the `id`, `password`, and `tenant` values as the credentials for running your app.</span></span> 
 
-## <a name="managing-roles"></a><span data-ttu-id="0be4b-146">管理角色</span><span class="sxs-lookup"><span data-stu-id="0be4b-146">Managing roles</span></span> 
+## <a name="managing-roles"></a><span data-ttu-id="681a0-146">管理角色</span><span class="sxs-lookup"><span data-stu-id="681a0-146">Managing roles</span></span> 
 
 > [!NOTE]
-> <span data-ttu-id="0be4b-147">Azure 角色型存取控制 (RBAC) 是一種可定義及管理使用者和服務主體角色的模型。</span><span class="sxs-lookup"><span data-stu-id="0be4b-147">Azure Role-Based Access Control (RBAC) is a model for defining and managing roles for user and service principals.</span></span>
-> <span data-ttu-id="0be4b-148">角色會有一組相關聯的權限，以決定主體可以讀取、存取、寫入或管理的資源。</span><span class="sxs-lookup"><span data-stu-id="0be4b-148">Roles have sets of permissions associated with them, which determine the resources a principal can read, access, write, or manage.</span></span>
-> <span data-ttu-id="0be4b-149">如需 RBAC 和角色的詳細資訊，請參閱 [RBAC：內建角色](/azure/active-directory/role-based-access-built-in-roles)。</span><span class="sxs-lookup"><span data-stu-id="0be4b-149">For more information on RBAC and roles, see [RBAC: Built-in roles](/azure/active-directory/role-based-access-built-in-roles).</span></span>
+> <span data-ttu-id="681a0-147">Azure 角色型存取控制 (RBAC) 是一種可定義及管理使用者和服務主體角色的模型。</span><span class="sxs-lookup"><span data-stu-id="681a0-147">Azure Role-Based Access Control (RBAC) is a model for defining and managing roles for user and service principals.</span></span>
+> <span data-ttu-id="681a0-148">角色會有一組相關聯的權限，以決定主體可以讀取、存取、寫入或管理的資源。</span><span class="sxs-lookup"><span data-stu-id="681a0-148">Roles have sets of permissions associated with them, which determine the resources a principal can read, access, write, or manage.</span></span>
+> <span data-ttu-id="681a0-149">如需 RBAC 和角色的詳細資訊，請參閱 [RBAC：內建角色](/azure/active-directory/role-based-access-built-in-roles)。</span><span class="sxs-lookup"><span data-stu-id="681a0-149">For more information on RBAC and roles, see [RBAC: Built-in roles](/azure/active-directory/role-based-access-built-in-roles).</span></span>
 
-<span data-ttu-id="0be4b-150">Azure CLI 2.0 提供下列命令以供您管理角色指派︰</span><span class="sxs-lookup"><span data-stu-id="0be4b-150">The Azure CLI 2.0 provides the following commands to manage role assignments:</span></span>
+<span data-ttu-id="681a0-150">Azure CLI 2.0 提供下列命令以供您管理角色指派︰</span><span class="sxs-lookup"><span data-stu-id="681a0-150">The Azure CLI 2.0 provides the following commands to manage role assignments:</span></span>
 
-* [<span data-ttu-id="0be4b-151">az 角色指派清單</span><span class="sxs-lookup"><span data-stu-id="0be4b-151">az role assignment list</span></span>](/cli/azure/role/assignment#list)
-* [<span data-ttu-id="0be4b-152">az 角色指派建立</span><span class="sxs-lookup"><span data-stu-id="0be4b-152">az role assignment create</span></span>](/cli/azure/role/assignment#create)
-* [<span data-ttu-id="0be4b-153">az 角色指派刪除</span><span class="sxs-lookup"><span data-stu-id="0be4b-153">az role assignment delete</span></span>](/cli/azure/role/assignment#delete)
+* [<span data-ttu-id="681a0-151">az 角色指派清單</span><span class="sxs-lookup"><span data-stu-id="681a0-151">az role assignment list</span></span>](/cli/azure/role/assignment#list)
+* [<span data-ttu-id="681a0-152">az 角色指派建立</span><span class="sxs-lookup"><span data-stu-id="681a0-152">az role assignment create</span></span>](/cli/azure/role/assignment#create)
+* [<span data-ttu-id="681a0-153">az 角色指派刪除</span><span class="sxs-lookup"><span data-stu-id="681a0-153">az role assignment delete</span></span>](/cli/azure/role/assignment#delete)
 
-<span data-ttu-id="0be4b-154">服務主體的預設角色是**參與者**。</span><span class="sxs-lookup"><span data-stu-id="0be4b-154">The default role for a service principal is **Contributor**.</span></span> <span data-ttu-id="0be4b-155">應用程式與 Azure 服務的互動可能並非最佳選擇，因為它所提供的權限很廣泛。</span><span class="sxs-lookup"><span data-stu-id="0be4b-155">It may not be the best choice for an app's interactions with Azure services, given its broad permissions.</span></span> <span data-ttu-id="0be4b-156">**讀取者**角色的權限較為侷限，因此很適合唯讀存取使用。</span><span class="sxs-lookup"><span data-stu-id="0be4b-156">The **Reader** role is more restrictive and is a good choice for read-only access.</span></span> <span data-ttu-id="0be4b-157">您可以透過 Azure 入口網站來檢視角色專屬權限的詳細資料，或建立自訂角色。</span><span class="sxs-lookup"><span data-stu-id="0be4b-157">You can view details on role-specific permissions or create custom ones through the Azure portal.</span></span>
+<span data-ttu-id="681a0-154">服務主體的預設角色是**參與者**。</span><span class="sxs-lookup"><span data-stu-id="681a0-154">The default role for a service principal is **Contributor**.</span></span> <span data-ttu-id="681a0-155">應用程式與 Azure 服務的互動可能並非最佳選擇，因為它所提供的權限很廣泛。</span><span class="sxs-lookup"><span data-stu-id="681a0-155">It may not be the best choice for an app's interactions with Azure services, given its broad permissions.</span></span> <span data-ttu-id="681a0-156">**讀取者**角色的權限較為侷限，因此很適合唯讀存取使用。</span><span class="sxs-lookup"><span data-stu-id="681a0-156">The **Reader** role is more restrictive and is a good choice for read-only access.</span></span> <span data-ttu-id="681a0-157">您可以透過 Azure 入口網站來檢視角色專屬權限的詳細資料，或建立自訂角色。</span><span class="sxs-lookup"><span data-stu-id="681a0-157">You can view details on role-specific permissions or create custom ones through the Azure portal.</span></span>
 
-<span data-ttu-id="0be4b-158">在此範例中，對先前的範例新增**讀取者**角色，並刪除**參與者**角色︰</span><span class="sxs-lookup"><span data-stu-id="0be4b-158">In this example, add the **Reader** role to our prior example, and delete the **Contributor** one:</span></span>
+<span data-ttu-id="681a0-158">在此範例中，對先前的範例新增**讀取者**角色，並刪除**參與者**角色︰</span><span class="sxs-lookup"><span data-stu-id="681a0-158">In this example, add the **Reader** role to our prior example, and delete the **Contributor** one:</span></span>
 
 ```azurecli-interactive
 az role assignment create --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d --role Reader
 az role assignment delete --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d --role Contributor
 ```
 
-<span data-ttu-id="0be4b-159">列出目前指派的角色來確認變更︰</span><span class="sxs-lookup"><span data-stu-id="0be4b-159">Verify the changes by listing the currently assigned roles:</span></span>
+<span data-ttu-id="681a0-159">列出目前指派的角色來確認變更︰</span><span class="sxs-lookup"><span data-stu-id="681a0-159">Verify the changes by listing the currently assigned roles:</span></span>
 
 ```azurecli-interactive
 az role assignment list --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d
@@ -211,16 +211,16 @@ az role assignment list --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d
 ```
 
 > [!NOTE] 
-> <span data-ttu-id="0be4b-160">如果您的帳戶沒有足夠的權限可指派角色，您會看到一則錯誤訊息。</span><span class="sxs-lookup"><span data-stu-id="0be4b-160">If your account does not have sufficient permissions to assign a role, you see an error message.</span></span>
-> <span data-ttu-id="0be4b-161">此訊息說明您的帳戶「沒有權限來對 '/subscriptions/{guid}' 範圍執行 'Microsoft.Authorization/roleAssignments/write' 動作」。</span><span class="sxs-lookup"><span data-stu-id="0be4b-161">The message states your account "does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}'."</span></span>
+> <span data-ttu-id="681a0-160">如果您的帳戶沒有足夠的權限可指派角色，您會看到一則錯誤訊息。</span><span class="sxs-lookup"><span data-stu-id="681a0-160">If your account does not have sufficient permissions to assign a role, you see an error message.</span></span>
+> <span data-ttu-id="681a0-161">此訊息說明您的帳戶「沒有權限來對 '/subscriptions/{guid}' 範圍執行 'Microsoft.Authorization/roleAssignments/write' 動作」。</span><span class="sxs-lookup"><span data-stu-id="681a0-161">The message states your account "does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}'."</span></span>
    
-## <a name="change-the-credentials-of-a-security-principal"></a><span data-ttu-id="0be4b-162">變更安全性主體的認證</span><span class="sxs-lookup"><span data-stu-id="0be4b-162">Change the credentials of a security principal</span></span>
+## <a name="change-the-credentials-of-a-security-principal"></a><span data-ttu-id="681a0-162">變更安全性主體的認證</span><span class="sxs-lookup"><span data-stu-id="681a0-162">Change the credentials of a security principal</span></span>
 
-<span data-ttu-id="0be4b-163">定期檢閱權限並更新密碼是很好的安全性作法。</span><span class="sxs-lookup"><span data-stu-id="0be4b-163">It's a good security practice to review permissions and update passwords regularly.</span></span> <span data-ttu-id="0be4b-164">您也可以在應用程式變更時，管理及修改您的安全性認證。</span><span class="sxs-lookup"><span data-stu-id="0be4b-164">You may also want to manage and modify the security credentials as your app changes.</span></span>
+<span data-ttu-id="681a0-163">定期檢閱權限並更新密碼是很好的安全性作法。</span><span class="sxs-lookup"><span data-stu-id="681a0-163">It's a good security practice to review permissions and update passwords regularly.</span></span> <span data-ttu-id="681a0-164">您也可以在應用程式變更時，管理及修改您的安全性認證。</span><span class="sxs-lookup"><span data-stu-id="681a0-164">You may also want to manage and modify the security credentials as your app changes.</span></span>
 
-### <a name="reset-a-service-principal-password"></a><span data-ttu-id="0be4b-165">重設服務主體密碼</span><span class="sxs-lookup"><span data-stu-id="0be4b-165">Reset a service principal password</span></span>
+### <a name="reset-a-service-principal-password"></a><span data-ttu-id="681a0-165">重設服務主體密碼</span><span class="sxs-lookup"><span data-stu-id="681a0-165">Reset a service principal password</span></span>
 
-<span data-ttu-id="0be4b-166">使用 `az ad sp reset-credentials` 將目前的服務主體密碼進行重設。</span><span class="sxs-lookup"><span data-stu-id="0be4b-166">Use `az ad sp reset-credentials` to reset the current password for the service principal.</span></span>
+<span data-ttu-id="681a0-166">使用 `az ad sp reset-credentials` 將目前的服務主體密碼進行重設。</span><span class="sxs-lookup"><span data-stu-id="681a0-166">Use `az ad sp reset-credentials` to reset the current password for the service principal.</span></span>
 
 ```azurecli-interactive
 az ad sp reset-credentials --name 20bce7de-3cd7-49f4-ab64-bb5b443838c3 --password {new-password}
@@ -235,4 +235,4 @@ az ad sp reset-credentials --name 20bce7de-3cd7-49f4-ab64-bb5b443838c3 --passwor
 }
 ```
 
-<span data-ttu-id="0be4b-167">如果您省略 `--password` 選項，CLI 就會產生安全的密碼。</span><span class="sxs-lookup"><span data-stu-id="0be4b-167">The CLI generates a secure password if you leave out the `--password` option.</span></span>
+<span data-ttu-id="681a0-167">如果您省略 `--password` 選項，CLI 就會產生安全的密碼。</span><span class="sxs-lookup"><span data-stu-id="681a0-167">The CLI generates a secure password if you leave out the `--password` option.</span></span>
