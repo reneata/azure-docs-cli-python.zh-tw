@@ -34,6 +34,8 @@
       href: query-azure-cli.md
     - name: 訂用帳戶
       href: manage-azure-subscriptions-azure-cli.md
+    - name: 擴充功能
+      href: azure-cli-extensions.md
     - name: 版本資訊
       href: release-notes-azure-cli.md
 - name: 指令碼範例
