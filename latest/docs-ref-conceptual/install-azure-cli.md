@@ -5,18 +5,18 @@ keywords: "Azure CLI, 安裝 Azure CLI, Azure Python CLI, Azure CLI 參考"
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 08/17/2017
+ms.date: 11/01/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 4703a192e23b04d0ad42daf60e415d798610cce0
-ms.sourcegitcommit: 932cc86172ab55c00346f62504787c096ed7b2bd
+ms.openlocfilehash: 2b56382355cad5313a604ed1f493a2bcbebf3e27
+ms.sourcegitcommit: e9b4c6dd9093980b69ca47f93f44ac54d0e5b68a
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 10/24/2017
+ms.lasthandoff: 11/03/2017
 ---
 # <a name="install-azure-cli-20"></a>安裝 Azure CLI 2.0
 
@@ -102,12 +102,12 @@ ms.lasthandoff: 10/24/2017
 
 5.  從具有 `az` 命令的命令提示字元中執行 CLI。
 
-## <a name="install-on-debianubuntu-with-apt-get"></a>使用 apt get 在 Debian/Ubuntu 上安裝
+## <a name="install-with-apt-package-manager"></a>透過 APT 套件管理員安裝 
 
-針對使用 `apt` 套件管理員的散發套件，您可以透過 `apt-get` 來安裝 Azure CLI 2.0。
+針對使用 `apt` 套件管理員的散發套件 (例如 Ubuntu 或 Debian)，您可以透過 `apt-get` 來安裝 Azure CLI 2.0。
 
 > [!NOTE]
-> 您的散發套件必須支援 Python 2.7.x 或 Python 3.x，才能使用 CLI。
+> 您必須具備 Python 2.7.x 或 Python 3.x，才能使用 CLI。 如果您的散發套件並沒有套件，且您也沒有 Python 2.7.x 或 Python 3.x，請[安裝 Python](https://www.python.org/downloads/)。
 
 1. 修改來源清單：
  
@@ -135,12 +135,12 @@ ms.lasthandoff: 10/24/2017
 
 3.  從具有 `az` 命令的命令提示字元中執行 CLI。
 
-## <a name="install-on-rhel-fedora-and-centos-with-yum"></a>安裝於 RHEL、Fedora 及 CentOS 搭配 Yum
+## <a name="install-with-yum-package-manager"></a>透過 Yum 套件管理員安裝
 
-針對使用 `yum` 套件管理員的散發套件，您可以透過 `yum` 來安裝 Azure CLI 2.0。
+針對使用 `yum` 套件管理員的散發套件，例如 Red Hat Enterprise Linux (RHEL)、Fedora 或 CentOS，您可以透過 `yum` 安裝 Azure CLI 2.0。
 
 > [!NOTE]
-> 您的散發套件必須支援 Python 2.7.x 或 Python 3.x，才能使用 CLI。
+> 您必須具備 Python 2.7.x 或 Python 3.x，才能使用 CLI。 如果您的散發套件並沒有套件，且您也沒有 Python 2.7.x 或 Python 3.x，請[安裝 Python](https://www.python.org/downloads/)。
 
 1. 匯入 Microsoft 存放庫金鑰：
 
@@ -163,12 +163,12 @@ ms.lasthandoff: 10/24/2017
 
 4. 從具有 `az` 命令的命令提示字元中執行 CLI。
 
-## <a name="install-on-opensuse-and-sle-with-zypper"></a>安裝於 openSUSE 和 SLE 搭配 Zypper
+## <a name="install-with-zypper-package-manager"></a>透過 Zypper 套件管理員安裝
 
-針對使用 `zypper` 套件管理員的散發套件，您可以透過 `zypper` 來安裝 Azure CLI 2.0。
+針對使用 `zypper` 套件管理員的散發套件，例如 OpenSUSE 或 SLE，您可以透過 `zypper` 安裝 Azure CLI 2.0。
 
 > [!NOTE]
-> 您的散發套件必須支援 Python 2.7.x 或 Python 3.x，才能使用 CLI。
+> 您必須具備 Python 2.7.x 或 Python 3.x，才能使用 CLI。 如果您的散發套件並沒有套件，且您也沒有 Python 2.7.x 或 Python 3.x，請[安裝 Python](https://www.python.org/downloads/)。
 
 1. 匯入 Microsoft 存放庫金鑰：
 
@@ -266,7 +266,7 @@ curl https://azurecliprod.blob.core.windows.net/install | bash
 hash -r
 ```
 
-並查看問題是否已解決。
+並查看問題是否已解決。 此命令也可能不在您的 `$PATH`中。 請確定 `<install path>/bin` 有出現在您的 `$PATH` 中，並視需要重新啟動您的 shell。
 
 ## <a name="uninstall-cli-1x-versions"></a>解除安裝 CLI 1.x 版本
 
@@ -316,7 +316,7 @@ hash -r
 
 再次執行 [Azure CLI 安裝程式 (MSI)](https://aka.ms/InstallAzureCliWindows)。
 
-### <a name="update-with-apt-get"></a>使用 apt-get 更新
+### <a name="update-with-apt"></a>使用 Apt 更新
 
 若要更新 CLI 套件，請使用 `apt-get upgrade`。
 
@@ -330,6 +330,24 @@ hash -r
 > ```bash
 > sudo apt-get update && sudo apt-get install --only-upgrade -y azure-cli
 > ```
+
+### <a name="update-with-yum"></a>使用 Yum 更新
+
+使用 `yum update` 命令更新 Azure CLI。
+
+```bash
+yum check-update
+sudo yum update azure-cli
+```
+
+### <a name="update-with-zypper"></a>使用 Zypper 更新
+
+您可以使用 `zypper update` 命令更新套件。
+
+```bash
+sudo zypper refresh
+sudo zypper update azure-cli
+```
 
 ### <a name="update-with-docker"></a>使用 Docker 更新
 
@@ -381,12 +399,54 @@ hash -r
 
 請重新執行 [MSI](https://aka.ms/InstallAzureCliWindows) 並選擇解除安裝。
 
-### <a name="uninstall-with-apt-get"></a>使用 apt get 解除安裝
+### <a name="uninstall-with-apt"></a>使用 Apt 解除安裝
 
 透過 `apt-get remove` 解除安裝：
 
   ```bash
   sudo apt-get remove -y azure-cli
+  ```
+
+### <a name="uninstall-with-yum"></a>使用 Yum 解除安裝
+
+1. 從系統移除套件。
+
+   ```bash
+   sudo yum remove azure-cli
+   ```
+
+2. 如果您不打算重新安裝 CLI，移除存放庫資訊。
+
+   ```bash
+   sudo rm /etc/yum.repos.d/azure-cli.repo
+   ```
+
+3. 如果您移除存放庫資訊，也會移除 Microsoft GPG 簽章金鑰。
+
+  ```bash
+  MSFT_KEY=`rpm -qa gpg-pubkey /* --qf "%{version}-%{release} %{summary}\n" | grep Microsoft | awk '{print $1}'`
+  rpm -e --allmatches gpg-pubkey-$MSFT_KEY
+  ```
+
+### <a name="uninstall-with-zypper"></a>使用 Zypper 解除安裝
+
+1. 從系統移除套件。
+
+    ```bash
+    sudo zypper remove -y azure-cli
+    ```
+
+2. 如果您不打算重新安裝 CLI，移除存放庫資訊。
+
+  ```bash
+  sudo rm /etc/zypp/repos.d/azure-cli.repo
+  ```
+
+3. 如果您移除存放庫資訊，也會移除 Microsoft GPG 簽章金鑰。
+
+  ```bash
+  MSFT_KEY=`rpm -qa gpg-pubkey /* --qf "%{version}-%{release} %{summary}\n" | grep Microsoft | awk '{print $1}'`
+  rpm -e --allmatches gpg-pubkey-$MSFT_KEY
   ```
 
 ### <a name="uninstall-with-docker"></a>使用 Docker 解除安裝
