@@ -12,15 +12,17 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 65becd3a-9d69-4415-8a30-777d13a0e7aa
-ms.openlocfilehash: 4ab4f0de38614eff00f55bad96ea886bb007f3c0
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 3ba1dd840102c738ccd9eb62a0b9db612cec48d1
+ms.sourcegitcommit: 5cfbea569fef193044da712708bc6957d3fb557c
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 10/14/2017
 ---
 # <a name="log-in-with-azure-cli-20"></a>登入 Azure CLI 2.0
 
-有數種方式可登入及使用 Azure CLI 進行驗證。 最簡單的開始使用方法是透過瀏覽器以互動方式登入，或在命令列登入。 我們建議的方法是使用服務主體，這種方式所建立的非互動式帳戶可讓您用來處理資源。 僅授與服務主體所需的適當權限，可確保您的自動化指令碼更加安全。
+有數種方式可登入及使用 Azure CLI 進行驗證。 最簡單的開始使用方法是透過瀏覽器以互動方式登入，或在命令列登入。 我們建議的方法是使用服務主體，這種方式所建立的非互動式帳戶可讓您用來處理資源。 僅授與服務主體所需的適當權限，可確保您的自動化指令碼更加安全。 
+
+您的私人認證資訊並未儲存在本機。 相反地，驗證權杖是由 Azure 產生並儲存。 登入之後，若您的本機權杖在 14 天內未使用，會變為無效。 到時，您需要再次進行驗證。
 
 您使用 CLI 所執行的命令，會針對您的預設訂用帳戶來執行。  如果您有一個以上的訂用帳戶，建議您[確認預設訂用帳戶](manage-azure-subscriptions-azure-cli.md)，並適當地加以變更。
 

@@ -5,18 +5,18 @@ keywords: Azure CLI 2.0, Azure Active Directory, Azure Active directory, AD, RBA
 author: rloutlaw
 ms.author: routlaw
 manager: douge
-ms.date: 02/27/2017
+ms.date: 10/12/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: fab89cb8-dac1-4e21-9d34-5eadd5213c05
-ms.openlocfilehash: f37df762a9a605ea649b215f38f2e9866614f4ac
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: a6ad5611f3e507b65e160122c87e22ec44546588
+ms.sourcegitcommit: e8fe15e4f7725302939d726c75ba0fb3cad430be
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 10/27/2017
 ---
 # <a name="create-an-azure-service-principal-with-azure-cli-20"></a>使用 Azure CLI 2.0 來建立 Azure 服務主體
 
@@ -29,9 +29,9 @@ ms.lasthandoff: 09/04/2017
 
 ## <a name="what-is-a-service-principal"></a>何謂「服務主體」？
 
-Azure 服務主體是一項安全性識別，可供使用者所建立的應用程式、服務和自動化工具用來存取特定 Azure 資源。 您可以把它想成是具有特定角色的「使用者識別」(登入和密碼或憑證)，並具有受到嚴格控制的資源存取權限。 不同於一般的使用者識別，服務主體只需要能夠執行特定動作。 如果您只將執行管理工作所需要的最低權限等級授與給服務主體，它就能提高安全性。 
+Azure 服務主體是一項安全性識別，可供使用者所建立的應用程式、服務和自動化工具用來存取特定 Azure 資源。 您可以把它想成是具有特定角色的「使用者識別」(登入和密碼或憑證)，並具有受到嚴格控制的資源存取權限。 不同於一般的使用者識別，服務主體只需要能夠執行特定動作。 如果您只對服務主體授與它為了執行管理工作所需要的最低權限等級，它就能提高安全性。 
 
-目前，Azure CLI 2.0 只支援建立以密碼為基礎的驗證認證。 在本主題中，我們將討論使用特定的密碼來建立服務主體，以及選擇性地將特定的角色指派給它。
+Azure CLI 2.0 支援建立以密碼為基礎的驗證認證，以及以憑證認證。 在本主題中，我們將討論這兩種認證。
 
 ## <a name="verify-your-own-permission-level"></a>確認您自己的權限等級
 
@@ -76,9 +76,9 @@ az ad app list --display-name MyDemoWebApp
 
 `--display-name` 選項會篩選傳回的應用程式清單，來顯示以 MyDemoWebApp 為開頭且具有 `displayName` 的項目。
 
-### <a name="create-the-service-principal"></a>建立服務主體
+### <a name="create-a-service-principal-with-a-password"></a>使用密碼建立服務主體
 
-使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 來建立服務主體。 
+使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 和 `--password` 參數，透過密碼建立服務主題。 若未提供角色或範圍，則目前的訂用帳戶會預設為**參與者**角色。 若您使用 `--password` 或 `--cert` 參數建立服務主體，則會使用密碼驗證，則系統會產生一組密碼給您。
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name {appId} --password "{strong password}" 
@@ -96,6 +96,29 @@ az ad sp create-for-rbac --name {appId} --password "{strong password}"
 
  > [!WARNING] 
  > 請勿建立不安全的密碼。  請依照 [Azure AD 密碼規則和限制](/azure/active-directory/active-directory-passwords-policy)指引。
+
+### <a name="create-a-service-principal-with-a-self-signed-certificate"></a>使用自我簽署憑證建立服務主體
+
+使用 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) 和 `--create-cert` 參數建立自我簽署憑證。
+
+```azurecli-interactive
+az ad sp create-for-rbac --name {appId} --create-cert
+```
+
+```json
+{
+  "appId": "c495db57-82e0-4e2e-9369-069dff176858",
+  "displayName": "azure-cli-2017-10-12-22-15-38",
+  "fileWithCertAndPrivateKey": "<path>/<file-name>.pem",
+  "name": "http://MyDemoWebApp",
+  "password": null,
+  "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+}
+```
+
+複製 `fileWithCertAndPrivateKey` 回應的值。 這是驗證會使用的憑證檔案。
+
+如需使用憑證的更多選項，請參閱 [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac)。
 
 ### <a name="get-information-about-the-service-principal"></a>取得服務主體的相關資訊
 
@@ -118,10 +141,10 @@ az ad sp show --id a487e0c1-82af-47d9-9a0b-af184eb87646d
 
 ### <a name="sign-in-using-the-service-principal"></a>使用服務主體來登入
 
-您現在可以使用來自 `az ad sp show`的「應用程式識別碼」和「密碼」，來登入成為應用程式的新服務主體。  提供 `az ad sp create-for-rbac` 結果中的租用戶值。
+您現在可以使用 `az ad sp show` 的 *appId*，或*密碼*或已建立憑證的路徑，以新服務主體登入您的應用程式。  提供 `az ad sp create-for-rbac` 結果中的租用戶值。
 
 ```azurecli-interactive
-az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password {password} --tenant {tenant}
+az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password {password-or-path-to-cert} --tenant {tenant}
 ``` 
 
 成功登入之後，您會看到此輸出︰

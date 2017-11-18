@@ -12,13 +12,246 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: e893b99349bbf2a5eec8af254158eb07001f1da7
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 429b099dabd27d9356e88791f955ec52acd2a5f9
+ms.sourcegitcommit: 9b36c15dc0e10024e23b8018604f5ef63c025de1
 ms.translationtype: HT
 ms.contentlocale: zh-TW
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 10/24/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Azure CLI 2.0 版本資訊
+
+## <a name="october-24-2017"></a>2017 年 10 月 24 日
+
+版本 2.0.20
+
+### <a name="core"></a>核心
+
+* 將 `2017-03-09-profile` 更新為取用 `MGMT_STORAGE` API 版本 `2016-01-01`
+
+### <a name="acr"></a>ACR
+
+* 已將資源管理更新為指向`2017-10-01` API 版本
+* 已將「自備儲存體」SKU 變更為「傳統」
+* 已將「登錄 SKU」重新命名為「基本」、「標準」和「進階」
+
+### <a name="acs"></a>ACS
+
+* [預覽] 已新增 `az aks` 命令
+* 已修正 Kubernetes `get-credentials`
+
+### <a name="appservice"></a>AppService
+
+* 已修正下載的 `webapp` 記錄可能無效的問題
+
+### <a name="component"></a>元件
+
+* 已為所有的安裝程式和確認提示新增更清楚的取代訊息
+
+### <a name="monitor"></a>監視
+
+* 已新增 `action-group` 命令
+
+### <a name="resource"></a>資源
+
+* 已修正與 `group export` 中最新版本 msrest 相依性不相容的問題
+* 已修正 `policy assignment create` 以與內建的原則定義和原則集合定義搭配使用
+
+### <a name="vm"></a>VM
+
+* 已將引數 `--accelerated-networking` 新增至 `vmss create`
+
+
+## <a name="october-9-2017"></a>2017 年 10 月 9 日
+
+版本 2.0.19
+
+### <a name="core"></a>核心
+
+* 新增在 Azure Stack 中在結尾處使用斜線處理 ADFS 授權 URL 的方式
+
+### <a name="appservice"></a>AppService
+
+* 新增新命令`webapp update` 的一般更新
+
+### <a name="batch"></a>批次
+
+* 更新為 Batch SDK 4.0.0
+* 更新 VirtualMachineConfiguration 的 `--image` 選項以支援 publish:offer:sku:version 以外的 ARM 映像參考
+* 新增 Batch 延伸模組命令的新 CLI 延伸模型支援
+* 移除元件模型中的 Batch 支援
+
+### <a name="batchai"></a>Batchai
+
+* Batch AI 模組的初始版本
+
+### <a name="keyvault"></a>Keyvault
+
+* 修正在 Azure Stack 上使用 ADFS 時，Key Vault 驗證的問題。 [(#4448)](https://github.com/Azure/azure-cli/issues/4448)
+
+### <a name="network"></a>網路
+
+* 將 `application-gateway address-pool create` 的 `--server` 引數變更為可選用，以允許空白的位址集區
+* 更新 `traffic-manager` 以支援最新功能
+
+### <a name="resource"></a>資源
+
+* 新增 `--resource-group/-g` 選項的支援，將資源群組名稱變更為 `group`
+* 新增 `account lock` 命令以搭配訂用帳戶層級鎖定使用
+* 新增 `group lock` 命令以搭配群組層級鎖定使用
+* 新增 `resource lock` 命令以搭配資源層級鎖定使用
+
+### <a name="sql"></a>Sql
+
+* 新增使用「攜帶您自己的金鑰」進行 SQL 透明資料加密 (TDE) 和 TDE 的支援
+* 新增 `db list-deleted` 命令和 `db restore --deleted-time` 參數，以便尋找和還原已刪除的資料庫
+* 新增 `db op list` 和 `db op cancel`，提供在資料庫上列出清單和取消處理中作業的功能
+
+### <a name="storage"></a>儲存體
+
+* 新增檔案共用快照集的支援
+
+### <a name="vm"></a>VM
+
+* 修正 `vm show` 中使用 `-d` 導致遺漏私人 IP 位址所造成的損毀
+* [預覽] 新增輪流升級至`vmss create` 的支援
+* 新增使用 `vm encryption enable` 更新加密設定的支援
+* 在 `vm create` 中新增 `--os-disk-size-gb` 參數
+* 在 `vmss create` 中新增適用於 Windows 的 `--license-type` 參數
+
+
+## <a name="september-22-2017"></a>2017 年 9 月 22 日
+
+版本 2.0.18
+
+### <a name="resource"></a>資源
+
+* 已新增顯示內建原則定義的支援
+* 已新增建立原則定義的支援模式參數
+* 已新增對於 `managedapp definition create` UI 定義及範本的支援
+* [重大變更] 已變更 `managedapp` 資源類型，從 `appliances` 變為 `applications`，且從 `applianceDefinitions` 變為 `applicationDefinitions`
+
+### <a name="network"></a>網路
+
+* 已新增可用性區域，以支援 `network lb` 和 `network public-ip` 子命令
+* 已新增對 `express-route` 的 IPv6 Microsoft 對等互連支援
+* 已新增 `asg` 應用程式安全性群組命令
+* 將 `--application-security-groups` 引數新增至 `nic [create|ip-config create|ip-config update]`
+* 已將 `--source-asgs` 和 `--destination-asgs` 引數新增至 `nsg rule [create|update]`
+* 已將 `--ddos-protection` 和 `--vm-protection` 引數新增至 `vnet [create|update]`
+* 已新增 `network [vnet-gateway|vpn-client|show-url]` 命令
+
+### <a name="storage"></a>儲存體
+
+* 已修正更新 SDK 後 `storage account network-rule` 命令可能會失敗的問題
+
+### <a name="eventgrid"></a>Eventgrid
+
+* 已更新 Azure Event Grid Python SDK 以使用較新的 API 版本 "2017-09-15-preview"
+
+### <a name="sql"></a>SQL
+
+* 已將 `sql server list` 引數 `--resource-group` 變更為可選。 如果未指定，會傳回訂用帳戶中所有的 sql 伺服器
+* 已將 `--no-wait` 參數新增至 `db [create|copy|restore|update|replica create|create|update]` 和 `dw [create|update]`
+
+### <a name="keyvault"></a>Keyvault
+
+* 已新增從 proxy 後方支援 Keyvault 命令
+
+### <a name="vm"></a>VM
+
+* 已新增 `[vm|vmss|disk] create` 的可用性區域支援
+* 已修正使用 `--app-gateway ID` 與 `vmss create` 會導致失敗的問題
+* 已將引數 `--asgs` 新增至 `vm create`
+* 已新增使用 `vm run-command` 在 VM 上執行命令的支援
+* [預覽] 已新增使用 `vmss encryption` 加密 VMSS 磁碟的支援
+* 已新增使用 `vm perform-maintenance` 在 VM 上執行維護工作的支援
+
+### <a name="acs"></a>ACS
+
+* [預覽] 已針對 ACS 預覽區域，將 `--orchestrator-release` 引數新增至 `acs create`
+
+### <a name="appservice"></a>AppService
+
+* 已新增使用 `webapp auth [update|show]` 更新並顯示驗證設定的功能
+
+### <a name="backup"></a>備份
+
+* 預覽版本
+
+
+## <a name="september-11-2017"></a>2017 年 9 月 11 日
+
+版本 2.0.17
+
+### <a name="core"></a>核心
+
+* 啟用命令模組以在遙測中設定自己的相互關聯識別碼
+* 修正當遙測設為診斷模式時的 JSON 傾印問題
+
+### <a name="acs"></a>ACS
+
+* 已新增 `acs list-locations` 命令
+* 讓 `ssh-key-file` 隨附預期的預設值
+
+### <a name="appservice"></a>AppService
+
+* 新增在資源群組中建立 Web 應用程式，而非在作用中服務計劃中建立 Web 應用程式的功能
+
+### <a name="cdn"></a>CDN
+
+* 修正 `cdn custom-domain create` 的「CustomDomain 無法互動」錯誤。
+
+### <a name="extension"></a>分機
+
+* 初始版本。
+
+### <a name="keyvault"></a>Keyvault
+
+* 修正對 `keyvault set-policy` 的權限區分大小寫的問題。
+
+### <a name="network"></a>網路
+
+* 已將 `vnet list-private-access-services` 重新命名為 `vnet list-endpoint-services`
+* 己針對 `vnet subnet create/update` 將 `--private-access-services` 引數重新命名為 `--service-endpoints`
+* 已將多個 IP 和連接埠範圍的支援新增至 `nsg rule create/update`
+* 已將 SKU 的支援新增至 `lb create`
+* 已將 SKU 的支援新增至 `public-ip create`
+
+### <a name="resource"></a>資源
+
+* 允許在 `policy definition create` 及 `policy definition update` 中傳送資源原則參數定義
+* 允許為 `policy assignment create` 傳送參數值
+* 允許為所有參數傳送 JSON 或檔案
+* 遞增的 API 版本
+
+### <a name="sql"></a>SQL
+
+* 已新增 `sql server vnet-rule` 命令
+
+### <a name="vm"></a>VM
+
+* 已修正：在提供 `--scope` 之前不指派存取權
+* 已修正：使用相同延伸模組命名作為入口網站
+* 已從 `[vm|vmss] create` 輸出移除 `subscription`
+* 已修正：`[vm|vmss] create` 儲存體 SKU 不會套用至搭配映像的資料磁碟
+* 已修正：`vm format-secret --secrets` 不會接受新行分隔識別碼
+
+## <a name="august-31-2017"></a>2017 年 8 月 31 日
+
+版本 2.0.16
+
+### <a name="keyvault"></a>Keyvault
+
+* 修正試著自動使用 `secret download` 解析祕密編碼時發生錯誤的問題
+
+### <a name="sf"></a>Sf
+
+* 取代所有命令，以利於 Service Fabric CLI (sfctl)
+
+### <a name="storage"></a>儲存體
+
+* 修正無法在不支援 NetworkACL 功能的區域中建立儲存體帳戶的問題
+* 若指定內容類型和內容編碼，則判斷 Blob 及檔案上傳期間的內容類型及內容編碼
 
 ## <a name="august-28-2017"></a>2017 年 8 月 28 日
 
